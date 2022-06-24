@@ -6,7 +6,7 @@ import './BookComponent.css'
 const CharacterComponent = ({
   path,
   bookId,
-  name
+  full_name
   // title,
   // description,
   // pages,
@@ -22,13 +22,13 @@ const CharacterComponent = ({
   return (
     <Col lg={3} md={6}>
       <Card className='book-card mb-3'>
-        <Card.Img variant='top' className='book-img' src={image} />
+        {/* <Card.Img variant='top' className='book-img' src={image} /> */}
         <Card.Body className='book-desc'>
-          <Card.Title>{title}</Card.Title>
-          <Card.Text>{description}</Card.Text>
-          <Card.Text>Page</Card.Text>
-          <Card.Text className='text-xs-center'>{pages}</Card.Text>
-          <Card.Text>Price</Card.Text>
+          {/* <Card.Title>{title}</Card.Title> */}
+          {/* <Card.Text>{description}</Card.Text>
+          <Card.Text>Page</Card.Text> */}
+          <Card.Text className='text-xs-center'>{full_name}</Card.Text>
+          {/* <Card.Text>Price</Card.Text>
           <Card.Text>Rp {price}</Card.Text>
           <Card.Text>Purchase Amount</Card.Text>
           <Card.Text>Rp {purchaseAmount}</Card.Text>
@@ -39,23 +39,24 @@ const CharacterComponent = ({
           <Card.Text>Stock </Card.Text>
           <Card.Text> {stock}</Card.Text>
           <Card.Text>Year</Card.Text>
-          <Card.Text> {year}</Card.Text>
+          <Card.Text> {year}</Card.Text> */}
           <ButtonGroup aria-label='Basic example' className=''>
             <Link
-              to={`${path}/${bookId}`}
-              className='btn btn-sm btn-outline-secondary'
+              // to={`${path}/${bookId}`}
+              // className='btn btn-sm btn-outline-secondary'
             >
               Detail
             </Link>
 
             <Link
-              to={`${path}/edit/${bookId}`}
+              // to={`${path}/edit/${bookId}`}
               className='btn btn-sm btn-outline-warning'
             >
               Update
             </Link>
 
-            {purchaseAmount > 0 || purchaseAmount === null ? (
+            {/* {purchaseAmount > 0 || purchaseAmount === null ?
+             (
               <button
                 onClick={() => handleDelete(bookId)}
                 className='btn btn-sm btn-outline-danger'
@@ -70,7 +71,7 @@ const CharacterComponent = ({
               >
                 Delete
               </button>
-            )}
+            )} */}
           </ButtonGroup>
         </Card.Body>
       </Card>

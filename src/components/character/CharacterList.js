@@ -35,6 +35,7 @@ const CharacterList = ({ match }) => {
             path={path}
             key={character.id}
             bookId={character.id}
+            fullName={character.full_name}
             // title={character.title}
             // description={character.description}
             // pages={character.pages}
@@ -48,7 +49,7 @@ const CharacterList = ({ match }) => {
             // handleDelete={handleDelete}
           />
         ))}
-        {characters && !characters.length && <h4>No Book on Display</h4>}
+        {characters && !characters.length && <h4>No Character on Display</h4>}
       </Row>
       
     </section>
