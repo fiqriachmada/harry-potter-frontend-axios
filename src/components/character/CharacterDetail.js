@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Image, Row } from 'react-bootstrap'
-import { getBookById, getCharacterById } from '../../apis/characterService'
+import { getCharacterById } from '../../apis/characterService'
 
 const CharacterDetail = ({ match }) => {
   const { id } = match.params
-  const [book, setBook] = useState({})
+  const [character, setBook] = useState({})
 
   useEffect(() => {
     getCharacterById(id).then(response => setBook(response.data))
@@ -19,17 +19,17 @@ const CharacterDetail = ({ match }) => {
             <div className='row'>
               <div className='col-md-3'>
                 <Image
-                  src='https://gist.github.com/jutionck/fe216ab29246405b334458d8b6e30207/raw/3a1de2deb383ec3f2273ef7f7f0c1c7bd9fc0778/book-image-detail.jpeg'
+                  src={character.image}
                   fluid
                 />
               </div>
               <div className='col-md-9'>
-                <h4>{book.title}</h4>
+                {/* <h4>{book.title}</h4> */}
                 <hr />
                 <div className='row no-gutters align-items-center'>
                   <div className='col mr-2'>
                     <div className='mb-0 font-weight-bold text-gray-800'>
-                      {book.price}
+                      {/* {book.price} */}
                     </div>
                   </div>
                   <div className='col-auto'>
@@ -49,7 +49,7 @@ const CharacterDetail = ({ match }) => {
                     <p className='card-text text-justify'>
                       <strong>Deskripsi</strong> <br />
                       <br />
-                      {book.description}
+                      {/* {book.description} */}
                     </p>
                   </div>
                   <div className='col-md-4'>
@@ -63,7 +63,7 @@ const CharacterDetail = ({ match }) => {
                       </div>
                       <div className='col-auto'>
                         <div className='btn-group float-right'>
-                          {book.pages}
+                          {/* {book.pages} */}
                         </div>
                       </div>
                     </div>
@@ -74,7 +74,7 @@ const CharacterDetail = ({ match }) => {
                         </div>
                       </div>
                       <div className='col-auto'>
-                        <div className='btn-group float-right'>{book.year}</div>
+                        {/* <div className='btn-group float-right'>{book.year}</div> */}
                       </div>
                     </div>
                     <div className='row no-gutters align-items-center'>
@@ -85,7 +85,7 @@ const CharacterDetail = ({ match }) => {
                       </div>
                       <div className='col-auto'>
                         <div className='btn-group float-right'>
-                          {book.language}
+                          {/* {book.language} */}
                         </div>
                       </div>
                     </div>
@@ -97,7 +97,7 @@ const CharacterDetail = ({ match }) => {
                       </div>
                       <div className='col-auto'>
                         <div className='btn-group float-right'>
-                          {book.publisher}
+                          {/* {book.publisher} */}
                         </div>
                       </div>
                     </div>

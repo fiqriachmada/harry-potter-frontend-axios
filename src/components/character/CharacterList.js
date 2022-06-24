@@ -35,16 +35,16 @@ const CharacterList = ({ match }) => {
             key={character.id}
             chacharacterId={character.id}
             fullName={character.full_name}
-            // title={character.title}
+            image={character.image}
             // description={character.description}
             // pages={character.pages}
+
             // purchaseAmount={character.purchaseAmount}
             // price={character.price}
             // language={character.language}
             // stock={character.stock}
             // publisher={character.publisher}
             // year={character.year}
-            // image={tmpImage}
             // handleDelete={handleDelete}
           />
         ))}

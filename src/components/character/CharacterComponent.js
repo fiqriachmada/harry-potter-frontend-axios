@@ -5,14 +5,14 @@ import './BookComponent.css'
 
 const CharacterComponent = ({
   path,
+  image,
   characterId,
-  fullName,
+  fullName
   // title,
   // description,
   // pages,
   // purchaseAmount,
   // price,
-  // image,
   // language,
   // stock,
   // publisher,
@@ -22,7 +22,11 @@ const CharacterComponent = ({
   return (
     <Col lg={3} md={6}>
       <Card className='book-card mb-3'>
-        {/* <Card.Img variant='top' className='book-img' src={image} /> */}
+        <Card.Img
+          variant='top'
+          className='img-fluid rounded-circle'
+          src={image}
+        />
         <Card.Body className='book-desc'>
           {/* <Card.Title>{title}</Card.Title> */}
           {/* <Card.Text>{description}</Card.Text>
