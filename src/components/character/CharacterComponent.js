@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Col, ButtonGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import './BookComponent.css'
+import './CharacterComponent.css'
 
 const CharacterComponent = ({
   path,
@@ -24,7 +24,8 @@ const CharacterComponent = ({
       <Card className='book-card mb-3'>
         <Card.Img
           variant='top'
-          className='img-fluid rounded-circle'
+          className='card-img-top '
+          alt='...'
           src={image}
         />
         <Card.Body className='book-desc'>
@@ -32,7 +33,7 @@ const CharacterComponent = ({
           {/* <Card.Text>{description}</Card.Text>
           <Card.Text>Page</Card.Text> */}
           <Card.Text className='text-xs-center'>{characterId}</Card.Text>
-          <Card.Text className='text-xs-center'>{fullName}</Card.Text>
+          <Card.Title className='text-xs-center'>{fullName}</Card.Title>
           {/* <Card.Text>Price</Card.Text>
           <Card.Text>Rp {price}</Card.Text>
           <Card.Text>Purchase Amount</Card.Text>
