@@ -4,10 +4,10 @@ import { getCharacterById } from '../../apis/characterService'
 
 const CharacterDetail = ({ match }) => {
   const { id } = match.params
-  const [character, setBook] = useState({})
+  const [character, setCharacter] = useState({})
 
   useEffect(() => {
-    getCharacterById(id).then(response => setBook(response.data))
+    getCharacterById(id).then(response => setCharacter(response.data))
   }, [])
 
   return (
@@ -24,7 +24,7 @@ const CharacterDetail = ({ match }) => {
                 />
               </div>
               <div className='col-md-9'>
-                {/* <h4>{book.title}</h4> */}
+                <h4>{character.fullName}</h4>
                 <hr />
                 <div className='row no-gutters align-items-center'>
                   <div className='col mr-2'>

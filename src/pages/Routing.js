@@ -17,7 +17,7 @@ const Routing = () => {
 
           <Route path='/characters' exact component={CharacterList} />
 
-          <Route path='/books/:id' exact component={CharacterDetail} />
+          <Route path='/characters/:id' exact component={CharacterDetail} />
         </Switch>
       </section>
       <Footer />
