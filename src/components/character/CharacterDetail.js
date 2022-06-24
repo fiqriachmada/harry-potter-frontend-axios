@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Image, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { getCharacterById } from '../../apis/characterService'
 
-const CharacterDetail = ({ match }) => {
+const CharacterDetail = ({ match, path, characterId }) => {
   const { id } = match.params
   const [character, setCharacter] = useState({})
 
@@ -18,16 +19,12 @@ const CharacterDetail = ({ match }) => {
           <div className='card-body'>
             <div className='row'>
               <div className='col-md-3'>
-                <Image
-                  src={character.image}
-                  fluid
-                />
+                <Image src={character.image} fluid rounded />
               </div>
               <div className='col-md-9'>
-                <h4>{character.fullName}</h4>
-                <hr />
                 <div className='row no-gutters align-items-center'>
                   <div className='col mr-2'>
+                    <h1>{character.full_name}</h1>
                     <div className='mb-0 font-weight-bold text-gray-800'>
                       {/* {book.price} */}
                     </div>
@@ -38,7 +35,9 @@ const CharacterDetail = ({ match }) => {
                         type='submit'
                         className='card-link btn btn-sm btn-primary'
                       >
-                        <i className='fas fa-shopping-basket'></i> Beli
+                        <Link to={`${path}/edit/${characterId}`}>
+                          <i className='fas fa-shopping-basket'></i> Edit
+                        </Link>
                       </button>
                     </div>
                   </div>

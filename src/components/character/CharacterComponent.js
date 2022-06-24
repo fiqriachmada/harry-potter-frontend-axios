@@ -24,7 +24,7 @@ const CharacterComponent = ({
       <Card className='book-card mb-3'>
         <Card.Img
           variant='top'
-          className='card-img-top '
+          className='card-img-top'
           alt='...'
           src={image}
         />
@@ -32,7 +32,7 @@ const CharacterComponent = ({
           {/* <Card.Title>{title}</Card.Title> */}
           {/* <Card.Text>{description}</Card.Text>
           <Card.Text>Page</Card.Text> */}
-          <Card.Text className='text-xs-center'>{characterId}</Card.Text>
+          {/* <Card.Text className='text-xs-center'>{characterId}</Card.Text> */}
           <Card.Title className='text-xs-center'>{fullName}</Card.Title>
           {/* <Card.Text>Price</Card.Text>
           <Card.Text>Rp {price}</Card.Text>
@@ -55,7 +55,7 @@ const CharacterComponent = ({
             </Link>
 
             <Link
-              // to={`${path}/edit/${bookId}`}
+              to={`${path}/edit/${characterId}`}
               className='btn btn-sm btn-outline-warning'
             >
               Update

@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { tmpImage } from '../../apis/book'
+
 import { getCharacterList } from '../../apis/characterService'
 import CharacterComponent from './CharacterComponent'
-import BookComponent from './CharacterComponent'
+import CharacterDetail from './CharacterDetail'
 
 const CharacterList = ({ match }) => {
   const { path } = match
@@ -33,19 +33,9 @@ const CharacterList = ({ match }) => {
           <CharacterComponent
             path={path}
             key={character.id}
-            chacharacterId={character.id}
+            characterId={character.id}
             fullName={character.full_name}
             image={character.image}
-            // description={character.description}
-            // pages={character.pages}
-
-            // purchaseAmount={character.purchaseAmount}
-            // price={character.price}
-            // language={character.language}
-            // stock={character.stock}
-            // publisher={character.publisher}
-            // year={character.year}
-            // handleDelete={handleDelete}
           />
         ))}
         {characters && !characters.length && <h4>No Character on Display</h4>}

@@ -6,6 +6,7 @@ import Footer from './templates/Footer'
 
 import CharacterList from '../components/character/CharacterList'
 import CharacterDetail from '../components/character/CharacterDetail'
+import CharacterForm from '../components/character/CharacterForm'
 
 const Routing = () => {
   return (
@@ -18,6 +19,8 @@ const Routing = () => {
           <Route path='/characters' exact component={CharacterList} />
 
           <Route path='/characters/:id' exact component={CharacterDetail} />
+          <Route path='/characters/edit/:id' exact component={CharacterForm} />
+          {/* <Route path='/characters/edit/:id' exact component={CharacterDetail} /> */}
         </Switch>
       </section>
       <Footer />
