@@ -8,9 +8,7 @@ const Home = () => {
         <div className="col-lg-6 col-md-8 mx-auto">
           <h1 className="fw-light">Harry Potter Apps</h1>
           <p className="lead text-muted">
-            “He must have known I'd want to leave you." "No, he must have known
-            you would always want to come back.” ― J.K. Rowling, Harry Potter
-            and the Deathly Hallows
+            “Failure meant a stripping away of the inessential. I stopped pretending to myself that I was anything other than what I was, and began to direct all my energy into finishing the only work that mattered to me. Had I really succeeded at anything else, I might never have found the determination to succeed in the one arena I believed I truly belonged.” ― J.K. Rowling, Harry Potter Writer
           </p>
           <p>
             <Link to="/characters" className="btn btn-primary my-2 mx-2">

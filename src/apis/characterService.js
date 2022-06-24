@@ -1,8 +1,12 @@
-import http from "./httpCommon";
+// import http from "./httpCommon";
 
-const baseURL = "https://harry-potter-api.fiqriachmada.repl.co/";
+import axios from 'axios'
 
-const getCharacterList = () => http.get(baseURL + "/characters    ");
+const baseURL = 'https://harry-potter-api.fiqriachmada.repl.co/characters'
+
+const getCharacterList = () => axios.get(baseURL)
+
+const getCharacterById = id => axios.get(`${baseURL}/${id}`)
 
 // const getListBook = () => http.get(`${baseURL}`);
 
@@ -14,4 +18,4 @@ const getCharacterList = () => http.get(baseURL + "/characters    ");
 
 // const deleteBook = (id) => http.delete(`${baseURL}/${id}`);
 
-export { getCharacterList };
+export { getCharacterList, getCharacterById }

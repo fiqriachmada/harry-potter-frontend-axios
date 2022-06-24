@@ -5,8 +5,8 @@ import './BookComponent.css'
 
 const CharacterComponent = ({
   path,
-  bookId,
-  full_name
+  characterId,
+  fullName,
   // title,
   // description,
   // pages,
@@ -27,7 +27,8 @@ const CharacterComponent = ({
           {/* <Card.Title>{title}</Card.Title> */}
           {/* <Card.Text>{description}</Card.Text>
           <Card.Text>Page</Card.Text> */}
-          <Card.Text className='text-xs-center'>{full_name}</Card.Text>
+          <Card.Text className='text-xs-center'>{characterId}</Card.Text>
+          <Card.Text className='text-xs-center'>{fullName}</Card.Text>
           {/* <Card.Text>Price</Card.Text>
           <Card.Text>Rp {price}</Card.Text>
           <Card.Text>Purchase Amount</Card.Text>
@@ -42,8 +43,8 @@ const CharacterComponent = ({
           <Card.Text> {year}</Card.Text> */}
           <ButtonGroup aria-label='Basic example' className=''>
             <Link
-              // to={`${path}/${bookId}`}
-              // className='btn btn-sm btn-outline-secondary'
+              to={`${path}/${characterId}`}
+              className='btn btn-sm btn-outline-secondary'
             >
               Detail
             </Link>
