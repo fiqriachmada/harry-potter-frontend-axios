@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Image, Row } from 'react-bootstrap'
+import { Button, Col, Image, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { getCharacterById } from '../../apis/characterService'
 
@@ -13,9 +13,9 @@ const CharacterDetail = ({ match, path, characterId }) => {
 
   return (
     <Row>
-      <Col>
-        <h3>Book Detail </h3>
-        <div className='card shadow h-100 py-2'>
+      <Col className='mb-5'>
+        <h3>Character Detail </h3>
+        <div className='card shadow-lg h-100 py-5 mb-5 '>
           <div className='card-body'>
             <div className='row'>
               <div className='col-md-3'>
@@ -31,14 +31,12 @@ const CharacterDetail = ({ match, path, characterId }) => {
                   </div>
                   <div className='col-auto'>
                     <div className='btn-group float-right'>
-                      <button
-                        type='submit'
-                        className='card-link btn btn-sm btn-primary'
+                      <Link
+                        to={`/characters/edit/${character.id}`}
+                        className='btn btn-sm btn-primary mb-3'
                       >
-                        <Link to={`${path}/edit/${characterId}`}>
-                          <i className='fas fa-shopping-basket'></i> Edit
-                        </Link>
-                      </button>
+                        Edit
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -57,46 +55,46 @@ const CharacterDetail = ({ match, path, characterId }) => {
                     <div className='row no-gutters align-items-center'>
                       <div className='col mr-2'>
                         <div className='mb-0 font-weight-bold text-gray-800'>
-                          Halaman
+                          Species
                         </div>
                       </div>
                       <div className='col-auto'>
-                        <div className='btn-group float-right'>
-                          {/* {book.pages} */}
+                        <div className='btn-group float-right text-capitalize'>
+                          {character.species}
                         </div>
                       </div>
                     </div>
                     <div className='row no-gutters align-items-center'>
                       <div className='col mr-2'>
                         <div className='mb-0 font-weight-bold text-gray-800'>
-                          Tahun Terbit
+                          Gender
                         </div>
                       </div>
                       <div className='col-auto'>
-                        {/* <div className='btn-group float-right'>{book.year}</div> */}
+                        <div className='btn-group float-right'>{character.gender}</div>
                       </div>
                     </div>
                     <div className='row no-gutters align-items-center'>
                       <div className='col mr-2'>
                         <div className='mb-0 font-weight-bold text-gray-800'>
-                          Bahasa
+                          House
                         </div>
                       </div>
                       <div className='col-auto'>
                         <div className='btn-group float-right'>
-                          {/* {book.language} */}
+                          {character.house}
                         </div>
                       </div>
                     </div>
                     <div className='row no-gutters align-items-center'>
                       <div className='col mr-2'>
                         <div className='mb-0 font-weight-bold text-gray-800'>
-                          Penerbit
+                          Date of Birth
                         </div>
                       </div>
                       <div className='col-auto'>
                         <div className='btn-group float-right'>
-                          {/* {book.publisher} */}
+                          {character.date_of_birth}
                         </div>
                       </div>
                     </div>

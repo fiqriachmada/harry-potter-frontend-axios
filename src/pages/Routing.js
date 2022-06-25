@@ -19,6 +19,7 @@ const Routing = () => {
           <Route path='/characters' exact component={CharacterList} />
 
           <Route path='/characters/:id' exact component={CharacterDetail} />
+
           <Route path='/characters/edit/:id' exact component={CharacterForm} />
           {/* <Route path='/characters/edit/:id' exact component={CharacterDetail} /> */}
         </Switch>
