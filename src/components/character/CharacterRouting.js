@@ -12,8 +12,11 @@ const CharacterRouting = ({ match }) => {
   return (
     <Switch>
       <Route exact path={path} component={CharacterList}></Route>
+
       <Route exact path={`${path}/:id`} component={CharacterDetail}></Route>
+
       <Route exact path={`${path}/edit/:id`} component={CharacterForm}></Route>
+      
       <Route exact path={`${path}/add`} component={CharacterForm}></Route>
     </Switch>
   )

@@ -1,15 +1,21 @@
-import axios from 'axios'
+import http from './httpCommon'
 
-const baseURL = 'https://harry-potter-api.fiqriachmada.repl.co/characters'
+const baseURL = '/characters'
 
-const getCharacterList = () => axios.get(baseURL)
+const createCharacter = data => http.post(`${baseURL}`, data)
 
-const getCharacterById = id => axios.get(`${baseURL}/${id}`)
+const getCharacterList = () => http.get(baseURL)
 
-const createCharacter = payload => axios.post(`${baseURL}`, payload)
+const getCharacterById = id => http.get(`${baseURL}/${id}`)
 
-const updateCharacter = (payload,id) => axios.put(`${baseURL}/${id}`, payload)
+const updateCharacter = (data, id) => http.put(`${baseURL}/${id}`, data)
 
-// const deleteBook = (id) => http.delete(`${baseURL}/${id}`);
+const deleteCharacter = id => http.delete(`${baseURL}/${id}`)
 
-export { getCharacterList, getCharacterById, createCharacter, updateCharacter }
+export {
+  getCharacterList,
+  getCharacterById,
+  createCharacter,
+  updateCharacter,
+  deleteCharacter
+}

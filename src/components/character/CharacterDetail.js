@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Col, Image, Row } from 'react-bootstrap'
+import { Col, Image, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { getCharacterById } from '../../apis/characterService'
 
-const CharacterDetail = ({ match, path, characterId }) => {
+const CharacterDetail = ({ match }) => {
   const { id } = match.params
   const [character, setCharacter] = useState({})
 
   useEffect(() => {
-    getCharacterById(id).then(response => setCharacter(response.data))
+    getCharacterById(id).then(response => {
+      console.log(response.data)
+      setCharacter(response.data)}
+      )
   }, [])
 
   return (
@@ -19,15 +22,12 @@ const CharacterDetail = ({ match, path, characterId }) => {
           <div className='card-body'>
             <div className='row'>
               <div className='col-md-3'>
-                <Image src={character.image} fluid rounded />
+                <Image src={character.image} rounded />
               </div>
               <div className='col-md-9'>
                 <div className='row no-gutters align-items-center'>
                   <div className='col mr-2'>
                     <h1>{character.full_name}</h1>
-                    <div className='mb-0 font-weight-bold text-gray-800'>
-                      {/* {book.price} */}
-                    </div>
                   </div>
                   <div className='col-auto'>
                     <div className='btn-group float-right'>
@@ -71,7 +71,9 @@ const CharacterDetail = ({ match, path, characterId }) => {
                         </div>
                       </div>
                       <div className='col-auto'>
-                        <div className='btn-group float-right'>{character.gender}</div>
+                        <div className='btn-group float-right'>
+                          {character.gender}
+                        </div>
                       </div>
                     </div>
                     <div className='row no-gutters align-items-center'>

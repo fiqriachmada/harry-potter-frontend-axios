@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 
 import { getCharacterList } from '../../apis/characterService'
 import CharacterComponent from './CharacterComponent'
-import CharacterDetail from './CharacterDetail'
 
 const CharacterList = ({ match }) => {
   const { path } = match
@@ -23,9 +22,9 @@ const CharacterList = ({ match }) => {
   }
 
   return (
-    <section className='py-5 container mt-5'>
+    <section className='py-5 container mt-1'>
       <h3>Character Page</h3>
-      <Link to='/character/add' className='btn btn-sm btn-primary mb-3'>
+      <Link to='/characters/add' className='btn btn-sm btn-primary mb-3'>
         Add Character
       </Link>
       <Row>
