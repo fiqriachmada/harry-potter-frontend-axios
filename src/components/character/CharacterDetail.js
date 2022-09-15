@@ -12,7 +12,7 @@ const CharacterDetail = ({ match }) => {
       console.log(response.data)
       setCharacter(response.data)}
       )
-  }, [])
+  }, [id])
 
   return (
     <Row>

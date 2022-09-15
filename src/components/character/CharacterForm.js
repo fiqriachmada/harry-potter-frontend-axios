@@ -58,7 +58,7 @@ const CharacterForm = ({ history, match }) => {
         setCharacter(character);
       });
     }
-  }, []);
+  }, [id, isAddMode, setCharacter, setValue]);
 
   return (
     <section>
@@ -93,9 +93,6 @@ const CharacterForm = ({ history, match }) => {
                             <Form.Control
                               type="text"
                               placeholder="Enter Name of the Character"
-                              onChange={(e) =>
-                                setCharacter.name(e.target.value)
-                              }
                               name="full_name"
                               {...register("full_name")}
                               className={`form-control ${errors.full_name}? 'is-invalid' : ''}`}
