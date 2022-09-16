@@ -16,6 +16,8 @@ const CharacterRouting = ({ match }) => {
       <Route exact path={`${path}/:id`} component={CharacterDetail}></Route>
 
       <Route exact path={`${path}/edit/:id`} component={CharacterForm}></Route>
+
+      <Route exact path={`${path}/delete/`} component={path}></Route>
       
       <Route exact path={`${path}/add`} component={CharacterForm}></Route>
     </Switch>

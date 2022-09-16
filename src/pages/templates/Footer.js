@@ -15,11 +15,13 @@ const Footer = () => {
 
           <hr className="clearfix w-100 d-md-none pb-0" />
 
-          <div className="col-md-3 mb-md-0 mb-3">
+          <div className="col-md-3 mb-md-0 mb-3 ">
             <h5 className="text-uppercase">Links</h5>
-            <ul className="list-unstyled">
+            <ul className="list-unstyled ">
               <li>
-                <Link to="/characters">Character</Link>
+                <Link className="text-decoration-none" to="/characters">
+                  Character
+                </Link>
               </li>
             </ul>
           </div>
@@ -27,8 +29,11 @@ const Footer = () => {
       </div>
 
       <div className="footer-copyright text-center py-3">
-        © 2020 Copyright:
-        <a href="https://fiqriachmada.design"> fiqriachmada.design</a>
+        ©{new Date().getFullYear()} by :
+        <a className="text-decoration-none" href="https://fiqriachmada.my.id">
+          {" "}
+          fiqriachmada
+        </a>
       </div>
     </footer>
   );

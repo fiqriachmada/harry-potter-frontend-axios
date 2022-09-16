@@ -53,7 +53,7 @@ const CharacterForm = ({ history, match }) => {
     if (!isAddMode) {
       getCharacterById(id).then((response) => {
         let character = response.data;
-        const fields = ["full_name", "species"];
+        const fields = ["full_name", "species", "gender"];
         fields.forEach((field) => setValue(field, character[field]));
         setCharacter(character);
       });
@@ -83,7 +83,7 @@ const CharacterForm = ({ history, match }) => {
                       <div>
                         <Form
                           className="mb-5 my-2"
-                          onSubmit={handleSubmit(submitForm)}
+                          onSubmit={void handleSubmit(submitForm)}
                         >
                           <Form.Group
                             className="mb-3"
@@ -99,6 +99,38 @@ const CharacterForm = ({ history, match }) => {
                             />
                             <div className="invalid-feedback">
                               {errors.full_name?.message}
+                            </div>
+                          </Form.Group>
+                          <Form.Group
+                            className="mb-3"
+                            controlId="formBasicDescription"
+                          >
+                            <Form.Label>Gender</Form.Label>
+                            <Form.Control
+                              type="text"
+                              placeholder="Enter Gender of the Character"
+                              name="gender"
+                              {...register("gender")}
+                              className={`form-control ${errors.gender}? 'is-invalid' : ''}`}
+                            />
+                            <div className="invalid-feedback">
+                              {errors.gender?.message}
+                            </div>
+                          </Form.Group>
+                          <Form.Group
+                            className="mb-3"
+                            controlId="formBasicDescription"
+                          >
+                            <Form.Label>Species</Form.Label>
+                            <Form.Control
+                              type="text"
+                              placeholder="Enter Species of the Character"
+                              name="species"
+                              {...register("species")}
+                              className={`form-control ${errors.species}? 'is-invalid' : ''}`}
+                            />
+                            <div className="invalid-feedback">
+                              {errors.species?.message}
                             </div>
                           </Form.Group>
                           <Button variant="primary" type="submit">

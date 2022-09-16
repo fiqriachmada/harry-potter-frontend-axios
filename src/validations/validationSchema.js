@@ -1,18 +1,18 @@
 import * as yup from 'yup'
 
 export const characterScheme = yup.object().shape({
-  title: yup
-    .string()
-    .required('Title Required')
-    .min(6, 'At least 6 char'),
-  description: yup
-    .string()
-    .required('Description Required')
-    .min(10, 'At least 10 char'),
   full_name: yup
     .string()
     .required('Language Required')
     .min(4),
+  gender: yup
+    .string()
+    .required('Title Required')
+    .min(6, 'At least 6 char'),
+  species: yup
+    .string()
+    .required('Description Required')
+    .min(10, 'At least 10 char'),
   publisher: yup
     .string()
     .required('Publisher Required')

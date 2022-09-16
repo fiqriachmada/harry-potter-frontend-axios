@@ -38,6 +38,8 @@ const CharacterList = ({ match }) => {
             key={character.id}
             characterId={character.id}
             fullName={character.full_name}
+            gender={character.gender}
+            species={character.species}
             image={character.image}
           />
         ))}
