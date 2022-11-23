@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Col, ButtonGroup } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import "./CharacterComponent.css";
 
 const CharacterComponent = ({
@@ -21,7 +22,7 @@ const CharacterComponent = ({
   handleDelete,
 }) => {
   return (
-    <Col lg={2} md={6}>
+    <Col lg={3} md={6}>
       <Card className="book-card mb-3">
         <Card.Img
           variant="top"
@@ -30,23 +31,9 @@ const CharacterComponent = ({
           src={image}
         />
         <Card.Body className="book-desc">
-          {/* <Card.Title>{title}</Card.Title> */}
-          {/* <Card.Text>{description}</Card.Text>
-          <Card.Text>Page</Card.Text> */}
-          {/* <Card.Text className='text-xs-center'>{characterId}</Card.Text> */}
           <Card.Title className="text-xs-center">{fullName}</Card.Title>
           <Card.Text> {gender}</Card.Text>
           <Card.Text>{species}</Card.Text>
-          {/* <Card.Text>Price</Card.Text>
-          <Card.Text>Rp {purchaseAmount}</Card.Text>
-          <Card.Text>Language</Card.Text>
-          <Card.Text>{language}</Card.Text>
-          <Card.Text>Publisher </Card.Text>
-          <Card.Text> {publisher}</Card.Text>
-          <Card.Text>Stock </Card.Text>
-          <Card.Text> {stock}</Card.Text>
-          <Card.Text>Year</Card.Text>
-          <Card.Text> {year}</Card.Text> */}
           <ButtonGroup aria-label="Basic example" className="col-md">
             <Link
               to={`${path}/${characterId}`}
@@ -62,7 +49,34 @@ const CharacterComponent = ({
               Update
             </Link>
 
-            {characterId < 0 ? (
+            <button
+              onClick={() => {
+                Swal.fire({
+                  title: "Are you sure?",
+                  text: "You won't be able to revert this!",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, delete it!",
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    // deleteParentuser(parentuser.id);
+                    handleDelete(characterId);
+                    Swal.fire(
+                      "Deleted!",
+                      "Your data has been deleted.",
+                      "success"
+                    );
+                  }
+                });
+              }}
+              // handleDelete(characterId)}
+              className="btn btn-sm btn-outline-danger"
+            >
+              Delete
+            </button>
+            {/* {characterId < 0 ? (
               <button
                 onClick={() => handleDelete(characterId)}
                 className="btn btn-sm btn-outline-danger"
@@ -77,7 +91,7 @@ const CharacterComponent = ({
               >
                 Delete
               </button>
-            )}
+            )} */}
           </ButtonGroup>
         </Card.Body>
       </Card>

@@ -8,6 +8,7 @@ import {
   getCharacterById,
   updateCharacter,
 } from "../../apis/characterService";
+import Swal from "sweetalert2";
 
 const CharacterForm = ({ history, match }) => {
   const { id } = match.params;
@@ -34,19 +35,30 @@ const CharacterForm = ({ history, match }) => {
   };
 
   const insert = (data) => {
-    return createCharacter(data).then((response) => {
-      console.log(response.data);
-      setCharacter(response.data);
-      response.history.push("characters/add");
-    });
+    return createCharacter(data)
+      .then((response) => {
+        console.log(response.data);
+        setCharacter(response.data);
+
+        Swal.fire("Berhasil", "", "success");
+        response.history.push("characters/add");
+      })
+      .catch((error) => {
+        setValue(error.response.data);
+      });
   };
 
   const update = (data, id) => {
-    return updateCharacter(data, id).then((response) => {
-      console.log(response.data, response.id);
-      setCharacter(response.data, response.id);
-      history.push(`characters/edit/${character.id}`);
-    });
+    return updateCharacter(data, id)
+      .then((response) => {
+        console.log(response.data, response.id);
+        setCharacter(response.data, response.id);
+        Swal.fire("Berhasil", "", "success");
+        history.push(`characters/`);
+      })
+      .catch((error) => {
+        setValue(error.response.data);
+      });
   };
 
   useEffect(() => {
