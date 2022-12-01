@@ -15,9 +15,6 @@ const CharacterForm = ({ history, match }) => {
 
   const isAddMode = !id;
 
-  console.log(id);
-  console.log(isAddMode);
-
   const [character, setCharacter] = useState({});
 
   const {
@@ -27,7 +24,6 @@ const CharacterForm = ({ history, match }) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(characterScheme) });
 
-  console.log(handleSubmit);
 
   const submitForm = (data) => {
     console.log(data);
@@ -37,7 +33,6 @@ const CharacterForm = ({ history, match }) => {
   const insert = (data) => {
     return createCharacter(data)
       .then((response) => {
-        console.log(response.data);
         setCharacter(response.data);
 
         Swal.fire("Berhasil", "", "success");
@@ -51,7 +46,6 @@ const CharacterForm = ({ history, match }) => {
   const update = (data, id) => {
     return updateCharacter(data, id)
       .then((response) => {
-        console.log(response.data, response.id);
         setCharacter(response.data, response.id);
         Swal.fire("Berhasil", "", "success");
         history.push(`characters/`);

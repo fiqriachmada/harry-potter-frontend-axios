@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Col, Image, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getCharacterById } from "../../apis/characterService";
+import './CharacterDetail.css'
 
 const CharacterDetail = ({ match }) => {
   const { id } = match.params;
@@ -34,18 +35,19 @@ const CharacterDetail = ({ match }) => {
   return (
     <Row>
       <Col className="mb-5">
-        {character && !character.length && <h4>No Character on Display</h4>}
+        {/* {character && !character.length && <h4>No Character on Display</h4>} */}
         <h3>Character Detail </h3>
-        <div className="card shadow-lg h-100 py-5 mb-5 ">
+
+        <div className="card shadow-lg py-5 mb-5 ">
+          <Image
+            className="shadow-lg w-25 mx-auto thumb-post rounded-circle"
+            fluid
+            rounded
+            src={character.image}
+          />
           <div className="card-body">
-            <div className="row">
-              <div className="col-md-3 ">
-                <Image
-                  className="img-responsive shadow-lg w-75 h-75 rounded-circle md:w-100 md:h-100"
-                  src={character.image}
-                />
-              </div>
-              <div className="col-md-9">
+            <div className="col">
+              <div className="col-md-12">
                 <div className="row no-gutters align-items-center">
                   <div className="col mr-2">
                     <h1>{character.full_name}</h1>
@@ -136,7 +138,7 @@ const CharacterDetail = ({ match }) => {
               &larr; Previous
             </button>
             <button
-            // disabled={character && !character.length}
+              // disabled={character && !character.length}
               type="button"
               class="btn btn-dark"
               onClick={handleNextClick}

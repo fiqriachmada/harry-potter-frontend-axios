@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Row } from "react-bootstrap";
+import { Row, Tooltip } from "react-bootstrap";
 
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -39,6 +39,11 @@ const CharacterList = ({ match }) => {
       });
   };
 
+  const renderTooltip = (props) => (
+    <Tooltip id="button-tooltip" {...props}>
+      Simple tooltip
+    </Tooltip>
+  );
   // console.log(loadData())
 
   return (
@@ -58,6 +63,7 @@ const CharacterList = ({ match }) => {
             species={character.species}
             image={character.image}
             handleDelete={handleDelete}
+            renderTooltip={renderTooltip}
           />
         ))}
         {characters && !characters.length && <h4>No Character on Display</h4>}

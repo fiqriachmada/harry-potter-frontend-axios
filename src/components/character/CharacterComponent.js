@@ -1,8 +1,8 @@
 import React from "react";
-import { Card, Col, ButtonGroup, Image, Row, Container } from "react-bootstrap";
+import { Card, Col, ButtonGroup, OverlayTrigger } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import "./CharacterComponent.css";
+// import "./CharacterComponent.css";
 
 const CharacterComponent = ({
   path,
@@ -11,34 +11,24 @@ const CharacterComponent = ({
   fullName,
   gender,
   species,
-  // description,
-  // pages,
-  // purchaseAmount,
-  // price,
-  // language,
-  // stock,
-  // publisher,
-  // year,
   handleDelete,
+  renderTooltip,
 }) => {
   return (
     <Col lg={3} md={6}>
       <Card className="book-card mb-3">
-        <Card.Img
-          variant="top"
-          className="card-img-top text-center"
-          alt={image}
-          src={image}
-          // thumbnail
-          // rounded
-        />
-        {/* <Container>
-          <Row>
-            <Col xs={6} md={4}>
-              <Image src={image} rounded thumbnail />
-            </Col>
-          </Row>
-        </Container> */}
+        <OverlayTrigger
+          placement="top"
+          delay={{ show: 250, hide: 400 }}
+          overlay={renderTooltip}
+        >
+          <Card.Img
+            variant="top"
+            className="text-center"
+            alt={image}
+            src={image}
+          />
+        </OverlayTrigger>
         <Card.Body className="book-desc">
           <Card.Title className="text-xs-center">{fullName}</Card.Title>
           <Card.Text> {gender}</Card.Text>
