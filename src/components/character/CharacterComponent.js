@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col, ButtonGroup } from "react-bootstrap";
+import { Card, Col, ButtonGroup, Image, Row, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import "./CharacterComponent.css";
@@ -29,7 +29,16 @@ const CharacterComponent = ({
           className="card-img-top text-center"
           alt={image}
           src={image}
+          // thumbnail
+          // rounded
         />
+        {/* <Container>
+          <Row>
+            <Col xs={6} md={4}>
+              <Image src={image} rounded thumbnail />
+            </Col>
+          </Row>
+        </Container> */}
         <Card.Body className="book-desc">
           <Card.Title className="text-xs-center">{fullName}</Card.Title>
           <Card.Text> {gender}</Card.Text>

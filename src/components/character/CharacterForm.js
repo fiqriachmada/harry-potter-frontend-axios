@@ -106,8 +106,10 @@ const CharacterForm = ({ history, match }) => {
                               type="text"
                               placeholder="Enter Name of the Character"
                               name="full_name"
+                              value={character.full_name}
                               {...register("full_name")}
                               className={`form-control ${errors.full_name}? 'is-invalid' : ''}`}
+                              onChange={(e) => setCharacter(e.target.value)}
                             />
                             <div className="invalid-feedback">
                               {errors.full_name?.message}
