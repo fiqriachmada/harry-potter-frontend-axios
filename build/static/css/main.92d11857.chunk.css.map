@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack://src/components/character/CharacterComponent.css"],"names":[],"mappings":"AAAA,cACE,WAAY,CACZ,YAAa,CACb,eACF","file":"main.92d11857.chunk.css","sourcesContent":[".card-img-top {\r\n  width: 100px;\r\n  height: 300px;\r\n  object-fit: fill;\r\n}\r\n"]}
