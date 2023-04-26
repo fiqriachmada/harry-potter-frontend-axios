@@ -1,7 +1,7 @@
-import React from "react";
-import { Card, Col, ButtonGroup, OverlayTrigger } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
+import React from 'react';
+import { Card, Col, ButtonGroup, OverlayTrigger } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 // import "./CharacterComponent.css";
 
 const CharacterComponent = ({
@@ -20,13 +20,17 @@ const CharacterComponent = ({
         <OverlayTrigger
           placement="top"
           delay={{ show: 250, hide: 400 }}
-          overlay={renderTooltip}
-        >
+          overlay={renderTooltip}>
           <Card.Img
             variant="top"
             className="text-center"
             alt={image}
             src={image}
+            style={{
+              height: 300,
+              background: `lightgrey`,
+              borderRadius: 5,
+            }}
           />
         </OverlayTrigger>
         <Card.Body className="book-desc">
@@ -36,43 +40,40 @@ const CharacterComponent = ({
           <ButtonGroup aria-label="Basic example" className="col-md">
             <Link
               to={`${path}/${characterId}`}
-              className="btn btn-sm btn-outline-secondary"
-            >
+              className="btn btn-sm btn-outline-secondary">
               Detail
             </Link>
 
             <Link
               to={`${path}/edit/${characterId}`}
-              className="btn btn-sm btn-outline-warning"
-            >
+              className="btn btn-sm btn-outline-warning">
               Update
             </Link>
 
             <button
               onClick={() => {
                 Swal.fire({
-                  title: "Are you sure?",
+                  title: 'Are you sure?',
                   text: "You won't be able to revert this!",
-                  icon: "warning",
+                  icon: 'warning',
                   showCancelButton: true,
-                  confirmButtonColor: "#3085d6",
-                  cancelButtonColor: "#d33",
-                  confirmButtonText: "Yes, delete it!",
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes, delete it!',
                 }).then((result) => {
                   if (result.isConfirmed) {
                     // deleteParentuser(parentuser.id);
                     handleDelete(characterId);
                     Swal.fire(
-                      "Deleted!",
-                      "Your data has been deleted.",
-                      "success"
+                      'Deleted!',
+                      'Your data has been deleted.',
+                      'success'
                     );
                   }
                 });
               }}
               // handleDelete(characterId)}
-              className="btn btn-sm btn-outline-danger"
-            >
+              className="btn btn-sm btn-outline-danger">
               Delete
             </button>
             {/* {characterId < 0 ? (

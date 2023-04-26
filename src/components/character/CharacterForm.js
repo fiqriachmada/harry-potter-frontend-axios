@@ -1,14 +1,14 @@
-import { Button, Col, Form, Image, Row } from "react-bootstrap";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { characterScheme } from "../../validations/validationSchema";
-import { useEffect, useState } from "react";
+import { Button, Col, Form, Image, Row } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { characterScheme } from '../../validations/validationSchema';
+import { useEffect, useState } from 'react';
 import {
   createCharacter,
   getCharacterById,
   updateCharacter,
-} from "../../apis/characterService";
-import Swal from "sweetalert2";
+} from '../../apis/characterService';
+import Swal from 'sweetalert2';
 
 const CharacterForm = ({ history, match }) => {
   const { id } = match.params;
@@ -24,7 +24,6 @@ const CharacterForm = ({ history, match }) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(characterScheme) });
 
-
   const submitForm = (data) => {
     console.log(data);
     return isAddMode ? insert(data) : update(id, data);
@@ -35,8 +34,8 @@ const CharacterForm = ({ history, match }) => {
       .then((response) => {
         setCharacter(response.data);
 
-        Swal.fire("Berhasil", "", "success");
-        response.history.push("characters/add");
+        Swal.fire('Berhasil', '', 'success');
+        response.history.push('characters/add');
       })
       .catch((error) => {
         setValue(error.response.data);
@@ -47,7 +46,7 @@ const CharacterForm = ({ history, match }) => {
     return updateCharacter(data, id)
       .then((response) => {
         setCharacter(response.data, response.id);
-        Swal.fire("Berhasil", "", "success");
+        Swal.fire('Berhasil', '', 'success');
         history.push(`characters/`);
       })
       .catch((error) => {
@@ -59,7 +58,7 @@ const CharacterForm = ({ history, match }) => {
     if (!isAddMode) {
       getCharacterById(id).then((response) => {
         let character = response.data;
-        const fields = ["full_name", "species", "gender"];
+        const fields = ['full_name', 'species', 'gender'];
         fields.forEach((field) => setValue(field, character[field]));
         setCharacter(character);
       });
@@ -89,19 +88,17 @@ const CharacterForm = ({ history, match }) => {
                       <div>
                         <Form
                           className="mb-5 my-2"
-                          onSubmit={void handleSubmit(submitForm)}
-                        >
+                          onSubmit={void handleSubmit(submitForm)}>
                           <Form.Group
                             className="mb-3"
-                            controlId="formBasicDescription"
-                          >
+                            controlId="formBasicDescription">
                             <Form.Label>Name</Form.Label>
                             <Form.Control
                               type="text"
                               placeholder="Enter Name of the Character"
                               name="full_name"
                               value={character.full_name}
-                              {...register("full_name")}
+                              {...register('full_name')}
                               className={`form-control ${errors.full_name}? 'is-invalid' : ''}`}
                               onChange={(e) => setCharacter(e.target.value)}
                             />
@@ -111,14 +108,13 @@ const CharacterForm = ({ history, match }) => {
                           </Form.Group>
                           <Form.Group
                             className="mb-3"
-                            controlId="formBasicDescription"
-                          >
+                            controlId="formBasicDescription">
                             <Form.Label>Gender</Form.Label>
                             <Form.Control
                               type="text"
                               placeholder="Enter Gender of the Character"
                               name="gender"
-                              {...register("gender")}
+                              {...register('gender')}
                               className={`form-control ${errors.gender}? 'is-invalid' : ''}`}
                             />
                             <div className="invalid-feedback">
@@ -127,21 +123,23 @@ const CharacterForm = ({ history, match }) => {
                           </Form.Group>
                           <Form.Group
                             className="mb-3"
-                            controlId="formBasicDescription"
-                          >
+                            controlId="formBasicDescription">
                             <Form.Label>Species</Form.Label>
                             <Form.Control
                               type="text"
                               placeholder="Enter Species of the Character"
                               name="species"
-                              {...register("species")}
+                              {...register('species')}
                               className={`form-control ${errors.species}? 'is-invalid' : ''}`}
                             />
                             <div className="invalid-feedback">
                               {errors.species?.message}
                             </div>
                           </Form.Group>
-                          <Button variant="primary" type="submit">
+                          <Button
+                            variant="primary"
+                            type="submit"
+                            onClick={void handleSubmit(update)}>
                             Submit
                           </Button>
                         </Form>

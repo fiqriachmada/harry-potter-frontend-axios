@@ -21,7 +21,6 @@ const CharacterList = ({ match }) => {
 
   const loadData = () => {
     getCharacterList().then((response) => {
-      console.log(response.data);
       setCharacters(response.data);
     });
   };
