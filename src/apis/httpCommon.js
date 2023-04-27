@@ -1,6 +1,6 @@
 import axios from 'axios'
 export default axios.create({
-  baseURL: "https://apiharry-potter.fiqriachmada.repl.co/",
+  baseURL: "https://api-harry-potter-app.cyclic.app/",
   headers: {
     "Content-type": "application/json",
   },
