@@ -11,24 +11,17 @@ function CharacterEdit({ history, match }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    return updateCharacter({ ...character }, id).then((response) => {
-      Swal.fire('Berhasil', '', 'success');
-      history.push('/characters/' + id);
-    });
+    return updateCharacter({ ...character }, id)
+      .then((response) => {
+        Swal.fire('Berhasil Mengubah ' + character.full_name, '', 'success');
+        history.push('/characters/' + id);
+      })
+      .catch((error) => {
+        Swal.fire(error, 'Gagal', 'error');
+        history.push('/characters/' + id);
+      });
   };
-
-  //   const updateData = () => {
-  //     return updateCharacter(character, id)
-  //       .then((response) => {
-  //         setCharacter(response.data, response.id);
-  //         Swal.fire('Berhasil', '', 'success');
-  //         history.push(`characters/`);
-  //       })
-  //       .catch((error) => {
-  //         // setValue(error.response.data);
-  //         console.log('error', error);
-  //       });
-  //   };
+  
   const getData = () => {
     return getCharacterById(id).then((response) => setCharacter(response.data));
   };

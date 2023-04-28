@@ -9,14 +9,13 @@ const CharacterComponent = ({
   image,
   characterId,
   fullName,
-  gender,
-  species,
   handleDelete,
   renderTooltip,
+  onClick,
 }) => {
   return (
     <Col lg={3} md={6}>
-      <Card className="book-card mb-3">
+      <Card className="book-card mb-3" onClick={onClick}>
         <OverlayTrigger
           placement="top"
           delay={{ show: 250, hide: 400 }}
@@ -35,64 +34,47 @@ const CharacterComponent = ({
         </OverlayTrigger>
         <Card.Body className="book-desc">
           <Card.Title className="text-xs-center">{fullName}</Card.Title>
-          <Card.Text> {gender}</Card.Text>
-          <Card.Text>{species}</Card.Text>
-          <ButtonGroup aria-label="Basic example" className="col-md">
-            <Link
-              to={`${path}/${characterId}`}
-              className="btn btn-sm btn-outline-secondary">
-              Detail
-            </Link>
 
-            <Link
-              to={`${path}/edit/${characterId}`}
-              className="btn btn-sm btn-outline-warning">
-              Update
-            </Link>
+          <div className="d-flex justify-content-center">
+            <ButtonGroup className="col-12">
+              <Link
+                to={`${path}/${characterId}`}
+                className="btn btn-sm btn-outline-secondary col-4">
+                Detail
+              </Link>
 
-            <button
-              onClick={() => {
-                Swal.fire({
-                  title: 'Are you sure?',
-                  text: "You won't be able to revert this!",
-                  icon: 'warning',
-                  showCancelButton: true,
-                  confirmButtonColor: '#3085d6',
-                  cancelButtonColor: '#d33',
-                  confirmButtonText: 'Yes, delete it!',
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    // deleteParentuser(parentuser.id);
-                    handleDelete(characterId);
-                    Swal.fire(
-                      'Deleted!',
-                      'Your data has been deleted.',
-                      'success'
-                    );
-                  }
-                });
-              }}
-              // handleDelete(characterId)}
-              className="btn btn-sm btn-outline-danger">
-              Delete
-            </button>
-            {/* {characterId < 0 ? (
+              <Link
+                to={`${path}/edit/${characterId}`}
+                className="btn btn-sm btn-outline-warning col-4">
+                Update
+              </Link>
+
               <button
-                onClick={() => handleDelete(characterId)}
-                className="btn btn-sm btn-outline-danger"
-                disabled={true}
-              >
+                onClick={() => {
+                  Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!',
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      handleDelete(characterId);
+                      Swal.fire(
+                        'Deleted!',
+                        'Your data has been deleted.',
+                        'success'
+                      );
+                    }
+                  });
+                }}
+                className="btn btn-sm btn-outline-danger col-4">
                 Delete
               </button>
-            ) : (
-              <button
-                onClick={() => handleDelete(characterId)}
-                className="btn btn-sm btn-outline-danger"
-              >
-                Delete
-              </button>
-            )} */}
-          </ButtonGroup>
+            </ButtonGroup>
+          </div>
         </Card.Body>
       </Card>
     </Col>

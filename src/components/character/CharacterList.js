@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { Row, Tooltip } from "react-bootstrap";
+import { useEffect, useState } from 'react';
+import { Row, Tooltip } from 'react-bootstrap';
 
-import { Link } from "react-router-dom";
-import Swal from "sweetalert2";
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-import { deleteCharacter, getCharacterList } from "../../apis/characterService";
-import CharacterComponent from "./CharacterComponent";
+import { deleteCharacter, getCharacterList } from '../../apis/characterService';
+import CharacterComponent from './CharacterComponent';
 
-const CharacterList = ({ match }) => {
+const CharacterList = ({ match, history }) => {
   const { path } = match;
 
   // var history = useHistory();
@@ -31,7 +31,7 @@ const CharacterList = ({ match }) => {
         // history.back;
         window.location.reload();
         // history.push('/')
-        Swal.fire('','','success')
+        Swal.fire('', '', 'success');
       })
       .catch((error) => {
         setValidation(error.response.data);
@@ -63,6 +63,9 @@ const CharacterList = ({ match }) => {
             image={character.image}
             handleDelete={handleDelete}
             renderTooltip={renderTooltip}
+            onClick={() => {
+              history.push('/characters/' + character.id);
+            }}
           />
         ))}
         {characters && !characters.length && <h4>No Character on Display</h4>}
