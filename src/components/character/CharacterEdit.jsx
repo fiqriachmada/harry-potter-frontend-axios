@@ -21,7 +21,7 @@ function CharacterEdit({ history, match }) {
         history.push('/characters/' + id);
       });
   };
-  
+
   const getData = () => {
     return getCharacterById(id).then((response) => setCharacter(response.data));
   };
@@ -71,29 +71,22 @@ function CharacterEdit({ history, match }) {
                                 })
                               }
                             />
-                            {/* <div className="invalid-feedback">
-                              {errors.full_name?.message}
-                            </div> */}
                           </Form.Group>
-                          <Form.Group
-                            className="mb-3"
-                            controlId="formBasicDescription">
+
+                          <Form.Group>
                             <Form.Label>Gender</Form.Label>
-                            <Form.Control
-                              type="text"
-                              placeholder="Enter Gender of the Character"
-                              name="gender"
+                            <Form.Select
+                              aria-label="Default select example"
                               value={character.gender}
                               onChange={(e) =>
                                 setCharacter({
                                   ...character,
                                   gender: e.target.value,
                                 })
-                              }
-                            />
-                            {/* <div className="invalid-feedback">
-                              {errors.gender?.message}
-                            </div> */}
+                              }>
+                              <option value="male">Male</option>
+                              <option value="female">Female</option>
+                            </Form.Select>
                           </Form.Group>
                           <Form.Group
                             className="mb-3"

@@ -24,7 +24,7 @@ const CharacterDetail = ({ match, history }) => {
     <Row>
       <Col className="mb-3">
         {/* <div className="mb-2 "> */}
-        <h3 className='mb-3'>Character Detail </h3>
+        <h3 className="mb-3">Character Detail </h3>
         {/* </div> */}
         <div className="card shadow-lg py-5 mb-5 ">
           <div className="d-flex justify-content-center mt-2 mb-2">
@@ -85,7 +85,7 @@ const CharacterDetail = ({ match, history }) => {
                         </div>
                       </div>
                       <div className="col-auto">
-                        <div className="btn-group float-right">
+                        <div className="btn-group float-right text-capitalize">
                           {character.gender}
                         </div>
                       </div>
@@ -97,7 +97,7 @@ const CharacterDetail = ({ match, history }) => {
                         </div>
                       </div>
                       <div className="col-auto">
-                        <div className="btn-group float-right">
+                        <div className="btn-group float-right text-capitalize">
                           {character.house || '-'}
                         </div>
                       </div>
@@ -109,7 +109,7 @@ const CharacterDetail = ({ match, history }) => {
                         </div>
                       </div>
                       <div className="col-auto">
-                        <div className="btn-group float-right">
+                        <div className="btn-group float-right text-capitalize">
                           {character.date_of_birth || '-'}
                         </div>
                       </div>
