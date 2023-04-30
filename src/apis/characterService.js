@@ -4,7 +4,7 @@ const baseURL = '/characters'
 
 const createCharacter = data => http.post(`${baseURL}`, data)
 
-const getCharacterList = () => http.get(baseURL)
+const getCharacterList = (page) => http.get(`${baseURL}?page=${page}`)
 
 const getCharacterById = id => http.get(`${baseURL}/${id}`)
 
