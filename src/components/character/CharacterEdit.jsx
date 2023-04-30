@@ -165,28 +165,7 @@ function CharacterEdit({ history, match }) {
                             <Form.Label className="text-capitalize">
                               date of birth
                             </Form.Label>
-                            {/* <Form.Control
-                              type="date"
-                              value={character.date_of_birth}
-                              // value={date}
-                              onChange={(e) =>
-                                // setCharacter({
-                                //   ...character,
-                                //   date_of_birth: e.target.value,
-                                //   year_of_birth: e.target.value,
-                                // })
 
-                                {
-                                  const date = new Date(e.target.value);
-                                  const year = date.getFullYear();
-                                  setCharacter({
-                                    ...character,
-                                    date_of_birth: e.target.value,
-                                    year_of_birth: e.target.valueAsYear,
-                                  });
-                                }
-                              }
-                            /> */}
                             <Form.Control
                               type="date"
                               value={character.date_of_birth}

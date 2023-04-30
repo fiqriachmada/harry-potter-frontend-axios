@@ -60,11 +60,7 @@ const CharacterList = ({ match, history }) => {
       })
   }
 
-  const renderTooltip = props => (
-    <Tooltip id='button-tooltip' {...props}>
-      Simple tooltip
-    </Tooltip>
-  )
+  const renderTooltip = character => <Tooltip>{character.full_name}</Tooltip>
 
   return (
     <section className='py-5 container mt-1'>
@@ -83,13 +79,14 @@ const CharacterList = ({ match, history }) => {
             species={character.species}
             image={character.image}
             handleDelete={handleDelete}
-            renderTooltip={renderTooltip}
-            // onClick={() => {
-            //   history.push('/characters/' + character.id)
-            // }}
+            renderTooltip={renderTooltip(character)}
           />
         ))}
-        {isLoading === true && <div className='d-flex justify-content-center mt-5 mb-5'>Please Wait...</div>}
+        {isLoading === true && (
+          <div className='d-flex justify-content-center mt-5 mb-5'>
+            Please Wait...
+          </div>
+        )}
       </Row>
     </section>
   )
