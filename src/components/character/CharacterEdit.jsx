@@ -1,32 +1,53 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { Button, Col, Form, Image, Row } from 'react-bootstrap';
-import { getCharacterById, updateCharacter } from '../../apis/characterService';
-import { useState } from 'react';
-import Swal from 'sweetalert2';
+import React from "react";
+import { useEffect } from "react";
+import { Button, Col, Form, Image, Row } from "react-bootstrap";
+import {
+  getCharacterById,
+  updateCharacter,
+  getCharacterSpecies,
+  getCharacterHouses,
+} from "../../apis/characterService";
+import { useState } from "react";
+import Swal from "sweetalert2";
 
 function CharacterEdit({ history, match }) {
   const id = match.params.id;
   const [character, setCharacter] = useState({});
+  const [species, setSpecies] = useState([]);
+  const [house, setHouse] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     return updateCharacter({ ...character }, id)
       .then((response) => {
-        Swal.fire('Berhasil Mengubah ' + character.full_name, '', 'success');
-        history.push('/characters/' + id);
+        Swal.fire("Berhasil Mengubah " + character.full_name, "", "success");
+        history.push("/characters/" + id);
       })
       .catch((error) => {
-        Swal.fire(error, 'Gagal', 'error');
-        history.push('/characters/' + id);
+        Swal.fire(error, "Gagal", "error");
+        history.push("/characters/" + id);
       });
   };
 
   const getData = () => {
     return getCharacterById(id).then((response) => setCharacter(response.data));
   };
+
+  const getDataSpecies = () => {
+    return getCharacterSpecies().then((response) =>
+      setSpecies(response.data.data)
+    );
+  };
+  const getDataHouses = () => {
+    return getCharacterHouses().then((response) =>
+      setHouse(response.data.data)
+    );
+  };
+  
   useEffect(() => {
     getData();
+    getDataSpecies();
+    getDataHouses()
   }, []);
 
   return (
@@ -73,7 +94,7 @@ function CharacterEdit({ history, match }) {
                             />
                           </Form.Group>
 
-                          <Form.Group>
+                          <Form.Group className="mb-3">
                             <Form.Label>Gender</Form.Label>
                             <Form.Select
                               aria-label="Default select example"
@@ -83,19 +104,17 @@ function CharacterEdit({ history, match }) {
                                   ...character,
                                   gender: e.target.value,
                                 })
-                              }>
+                              }
+                            >
                               <option value="male">Male</option>
                               <option value="female">Female</option>
                             </Form.Select>
                           </Form.Group>
-                          <Form.Group
-                            className="mb-3"
-                            controlId="formBasicDescription">
+
+                          <Form.Group className="mb-3">
                             <Form.Label>Species</Form.Label>
-                            <Form.Control
-                              type="text"
-                              placeholder="Enter Species of the Character"
-                              name="species"
+                            <Form.Select
+                              aria-label="Default select example"
                               value={character.species}
                               onChange={(e) =>
                                 setCharacter({
@@ -103,11 +122,64 @@ function CharacterEdit({ history, match }) {
                                   species: e.target.value,
                                 })
                               }
+                              className="text-capitalize"
+                            >
+                              {species.map((species) => (
+                                <option
+                                  value={species.species}
+                                  className="text-capitalize"
+                                >
+                                  {species.species}
+                                </option>
+                              ))}
+                            </Form.Select>
+                          </Form.Group>
+
+                          <Form.Group className="mb-3">
+                            <Form.Label>House</Form.Label>
+                            <Form.Select
+                              aria-label="Default select example"
+                              value={character.house}
+                              onChange={(e) =>
+                                setCharacter({
+                                  ...character,
+                                  house: e.target.value,
+                                })
+                              }
+                              className="text-capitalize"
+                            >
+                              {house.map((house) => (
+                                <option
+                                  value={house.house}
+                                  className="text-capitalize"
+                                >
+                                  {house.house}
+                                </option>
+                              ))}
+                            </Form.Select>
+                          </Form.Group>
+
+                          <Form.Group className="mb-3">
+                            <Form.Label className="text-capitalize">
+                              date of birth
+                            </Form.Label>
+                            <Form.Control
+                              type="date"
+                              value={character.date_of_birth}
+                              // value={date}
+                              onChange={(e) =>
+                                setCharacter({
+                                  ...character,
+                                  date_of_birth: e.target.value,
+                                })
+                              }
                             />
                           </Form.Group>
+
                           <button
                             className="btn btn-primary"
-                            onClick={handleSubmit}>
+                            onClick={handleSubmit}
+                          >
                             Submit
                           </button>
                         </Form>

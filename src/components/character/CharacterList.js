@@ -84,9 +84,9 @@ const CharacterList = ({ match, history }) => {
             image={character.image}
             handleDelete={handleDelete}
             renderTooltip={renderTooltip}
-            onClick={() => {
-              history.push('/characters/' + character.id)
-            }}
+            // onClick={() => {
+            //   history.push('/characters/' + character.id)
+            // }}
           />
         ))}
         {isLoading === true && <div className='d-flex justify-content-center mt-5 mb-5'>Please Wait...</div>}

@@ -4,7 +4,11 @@ const baseURL = '/characters'
 
 const createCharacter = data => http.post(`${baseURL}`, data)
 
-const getCharacterList = (page) => http.get(`${baseURL}?page=${page}`)
+const getCharacterList = page => http.get(`${baseURL}?page=${page}`)
+
+const getCharacterSpecies = () => http.get(`${baseURL}/species`)
+
+const getCharacterHouses = () => http.get(`${baseURL}/house`)
 
 const getCharacterById = id => http.get(`${baseURL}/${id}`)
 
@@ -14,6 +18,8 @@ const deleteCharacter = id => http.delete(`${baseURL}/${id}`)
 
 export {
   getCharacterList,
+  getCharacterSpecies,
+  getCharacterHouses,
   getCharacterById,
   createCharacter,
   updateCharacter,
