@@ -60,6 +60,7 @@ function CharacterEdit({ history, match }) {
               <div className="card-body">
                 <div className="row">
                   <div className="col-lg-3">
+                  <div className="d-flex justify-content-center">
                     <Image
                       src={character.image}
                       style={{
@@ -69,6 +70,7 @@ function CharacterEdit({ history, match }) {
                         borderRadius: 5,
                       }}
                     />
+                  </div>
                   </div>
                   <div className="col-lg-9">
                     <div className="row no-gutters align-items-center">
