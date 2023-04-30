@@ -8,6 +8,7 @@ import CharacterList from '../components/character/CharacterList';
 import CharacterDetail from '../components/character/CharacterDetail';
 import CharacterForm from '../components/character/CharacterForm';
 import CharacterEdit from '../components/character/CharacterEdit';
+import CharacterAdd from '../components/character/CharacterAdd';
 
 const Routing = () => {
   return (
@@ -17,7 +18,8 @@ const Routing = () => {
         <Switch>
           <Route path="/" exact component={Home} />
 
-          <Route path="/characters/add" exact component={CharacterForm} />
+          {/* <Route path="/characters/add" exact component={CharacterForm} /> */}
+          <Route path="/characters/add" exact component={CharacterAdd} />
 
           <Route path="/characters/:id" exact component={CharacterDetail} />
 

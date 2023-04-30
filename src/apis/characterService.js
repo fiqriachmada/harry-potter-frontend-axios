@@ -6,9 +6,9 @@ const createCharacter = data => http.post(`${baseURL}`, data)
 
 const getCharacterList = page => http.get(`${baseURL}?page=${page}`)
 
-const getCharacterSpecies = () => http.get(`${baseURL}/species`)
+const getCharacterSpecies = () => http.get(`/species`)
 
-const getCharacterHouses = () => http.get(`${baseURL}/house`)
+const getCharacterHouses = () => http.get(`/house`)
 
 const getCharacterById = id => http.get(`${baseURL}/${id}`)
 
