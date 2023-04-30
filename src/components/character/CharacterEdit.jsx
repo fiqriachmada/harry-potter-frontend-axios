@@ -43,11 +43,11 @@ function CharacterEdit({ history, match }) {
       setHouse(response.data.data)
     );
   };
-  
+
   useEffect(() => {
     getData();
     getDataSpecies();
-    getDataHouses()
+    getDataHouses();
   }, []);
 
   return (
@@ -60,17 +60,17 @@ function CharacterEdit({ history, match }) {
               <div className="card-body">
                 <div className="row">
                   <div className="col-lg-3 mb-3">
-                  <div className="d-flex justify-content-center">
-                    <Image
-                      src={character.image}
-                      style={{
-                        width: 250,
-                        height: 250,
-                        background: `lightgrey`,
-                        borderRadius: 5,
-                      }}
-                    />
-                  </div>
+                    <div className="d-flex justify-content-center">
+                      <Image
+                        src={character.image}
+                        style={{
+                          width: 250,
+                          height: 250,
+                          background: `lightgrey`,
+                          borderRadius: 5,
+                        }}
+                      />
+                    </div>
                   </div>
                   <div className="col-lg-9">
                     <div className="row no-gutters align-items-center">
@@ -170,10 +170,21 @@ function CharacterEdit({ history, match }) {
                               value={character.date_of_birth}
                               // value={date}
                               onChange={(e) =>
-                                setCharacter({
-                                  ...character,
-                                  date_of_birth: e.target.value,
-                                })
+                                // setCharacter({
+                                //   ...character,
+                                //   date_of_birth: e.target.value,
+                                //   year_of_birth: e.target.value,
+                                // })
+
+                                {
+                                  const dob = new Date(e.target.value);
+                                  const yearOfBirth = dob.getFullYear();
+                                  setCharacter({
+                                    ...character,
+                                    date_of_birth: dob,
+                                    year_of_birth: yearOfBirth,
+                                  });
+                                }
                               }
                             />
                           </Form.Group>
