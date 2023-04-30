@@ -11,7 +11,7 @@ const CharacterDetail = ({ match, history }) => {
 
   useEffect(() => {
     getCharacterById(id).then(response => {
-      setCharacter(response.data)
+      setCharacter(response.data.data)
     })
   }, [id])
 

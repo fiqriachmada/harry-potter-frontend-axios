@@ -30,7 +30,7 @@ function CharacterEdit({ history, match }) {
   };
 
   const getData = () => {
-    return getCharacterById(id).then((response) => setCharacter(response.data));
+    return getCharacterById(id).then((response) => setCharacter(response.data.data));
   };
 
   const getDataSpecies = () => {
