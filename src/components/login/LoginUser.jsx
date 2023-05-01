@@ -23,7 +23,7 @@ function LoginPage({ setIsAuthenticated }) {
         history.push("/characters/");
       })
       .catch((error) => {
-        Swal.fire(error.message.toString(), "Gagal", "error");
+        Swal.fire(error.response.data.message, "Failed", "error");
         setError(error.response.data.message);
       });
   };
