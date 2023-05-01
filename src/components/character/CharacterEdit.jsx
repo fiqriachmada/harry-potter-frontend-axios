@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Col, Form, Image, Row } from "react-bootstrap";
 import {
   getCharacterById,
@@ -7,17 +6,18 @@ import {
   getCharacterSpecies,
   getCharacterHouses,
 } from "../../apis/characterService";
-import { useState } from "react";
 import Swal from "sweetalert2";
+import { CustomFormInput, CustomImage, DynamicButtonGroup } from ".";
 
 function CharacterEdit({ history, match }) {
   const id = match.params.id;
-  const [character, setCharacter] = useState([]);
+  const [character, setCharacter] = useState("");
   const [species, setSpecies] = useState([]);
   const [house, setHouse] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!character) return;
     return updateCharacter({ ...character }, id)
       .then((response) => {
         Swal.fire("Berhasil Mengubah " + character.full_name, "", "success");
@@ -40,6 +40,7 @@ function CharacterEdit({ history, match }) {
       setSpecies(response.data.data)
     );
   };
+
   const getDataHouses = () => {
     return getCharacterHouses().then((response) =>
       setHouse(response.data.data)
@@ -52,154 +53,111 @@ function CharacterEdit({ history, match }) {
     getDataHouses();
   }, []);
 
+  const items = [
+    {
+      label: "Full Name",
+      placeholder: "Enter Name of the Character",
+      onChange: (e) =>
+        setCharacter({
+          ...character,
+          full_name: e.target.value,
+        }),
+      value: character.full_name,
+    },
+    {
+      label: "Gender",
+      options: [
+        { label: "Male", value: "male" },
+        { label: "Female", value: "female" },
+      ],
+      onChange: (e) =>
+        setCharacter({
+          ...character,
+          gender: e.target.value,
+        }),
+      value: character.gender,
+    },
+    {
+      label: "Species",
+      options: species.map((species) => ({
+        label: species.species,
+        value: species.species,
+      })),
+      onChange: (e) =>
+        setCharacter({
+          ...character,
+          species: e.target.value,
+        }),
+      value: character.species,
+    },
+    {
+      label: "House",
+      options: house.map((house) => ({
+        label: house.house,
+        value: house.house,
+      })),
+      onChange: (e) =>
+        setCharacter({
+          ...character,
+          house: e.target.value,
+        }),
+      value: character.house,
+    },
+    {
+      label: "Date of Birth",
+      type: "date",
+      onChange: (e) =>
+        setCharacter({
+          ...character,
+          date_of_birth: e.target.value,
+        }),
+      value: character.date_of_birth,
+    },
+  ];
+
+  const onHandleBack = () => {
+    history.goBack();
+  };
+
+  const onHandleSubmit = (event) => {
+    handleSubmit(event);
+  };
+
+  const buttons = [
+    { text: "Back", onClick: onHandleBack, variant: "secondary" },
+    { text: "Submit", onClick: onHandleSubmit },
+  ];
+
   return (
     <section>
       <div>
         <Row>
-          {character != [] &&
-            character.map((character) => (
-              <Col className="mb-5">
-                <h3>Character Form </h3>
-                <div className="card shadow-lg h-100 py-5 mb-5 ">
-                  <div className="card-body">
+          <h3>Character Form </h3>
+          <Col className="mt-3 mb-3">
+            <div className="card shadow-lg h-100 py- mb-1 ">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-lg-3 mb-3">
+                    <div className="d-flex justify-content-center">
+                      <CustomImage src={character.image || ""} />
+                    </div>
+                  </div>
+                  <div className="col-lg-9">
+                    <div className="row no-gutters align-items-center">
+                      <div className="col mr-2"></div>
+                    </div>
+                    <hr />
                     <div className="row">
-                      <div className="col-lg-3 mb-3">
-                        <div className="d-flex justify-content-center">
-                          <Image
-                            src={character.image}
-                            style={{
-                              width: 250,
-                              height: 250,
-                              background: `lightgrey`,
-                              borderRadius: 5,
-                            }}
-                          />
-                        </div>
-                      </div>
-                      <div className="col-lg-9">
-                        <div className="row no-gutters align-items-center">
-                          <div className="col mr-2"></div>
-                        </div>
-                        <hr />
-                        <div className="row">
-                          <div>
-                            <Form className="mb-5 my-2">
-                              <Form.Group className="mb-3">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control
-                                  type="text"
-                                  placeholder="Enter Name of the Character"
-                                  name="full_name"
-                                  value={character.full_name}
-                                  onChange={(e) =>
-                                    setCharacter({
-                                      ...character,
-                                      full_name: e.target.value,
-                                    })
-                                  }
-                                />
-                              </Form.Group>
-
-                              <Form.Group className="mb-3">
-                                <Form.Label>Gender</Form.Label>
-                                <Form.Select
-                                  aria-label="Default select example"
-                                  value={character.gender}
-                                  onChange={(e) =>
-                                    setCharacter({
-                                      ...character,
-                                      gender: e.target.value,
-                                    })
-                                  }
-                                >
-                                  <option value="male">Male</option>
-                                  <option value="female">Female</option>
-                                </Form.Select>
-                              </Form.Group>
-
-                              <Form.Group className="mb-3">
-                                <Form.Label>Species</Form.Label>
-                                <Form.Select
-                                  aria-label="Default select example"
-                                  value={character.species}
-                                  onChange={(e) =>
-                                    setCharacter({
-                                      ...character,
-                                      species: e.target.value,
-                                    })
-                                  }
-                                  className="text-capitalize"
-                                >
-                                  {species.map((species) => (
-                                    <option
-                                      value={species.species}
-                                      className="text-capitalize"
-                                    >
-                                      {species.species}
-                                    </option>
-                                  ))}
-                                </Form.Select>
-                              </Form.Group>
-
-                              <Form.Group className="mb-3">
-                                <Form.Label>House</Form.Label>
-                                <Form.Select
-                                  aria-label="Default select example"
-                                  value={character.house}
-                                  onChange={(e) =>
-                                    setCharacter({
-                                      ...character,
-                                      house: e.target.value,
-                                    })
-                                  }
-                                  className="text-capitalize"
-                                >
-                                  {house.map((house) => (
-                                    <option
-                                      value={house.house}
-                                      className="text-capitalize"
-                                    >
-                                      {house.house}
-                                    </option>
-                                  ))}
-                                </Form.Select>
-                              </Form.Group>
-
-                              <Form.Group className="mb-3">
-                                <Form.Label className="text-capitalize">
-                                  date of birth
-                                </Form.Label>
-
-                                <Form.Control
-                                  type="date"
-                                  value={character.date_of_birth}
-                                  onChange={(e) => {
-                                    const date = new Date(e.target.value);
-                                    const year = date.getFullYear();
-                                    setCharacter({
-                                      ...character,
-                                      date_of_birth: e.target.value,
-                                      year_of_birth: year,
-                                    });
-                                  }}
-                                />
-                              </Form.Group>
-
-                              <button
-                                className="btn btn-primary"
-                                onClick={handleSubmit}
-                              >
-                                Submit
-                              </button>
-                            </Form>
-                          </div>
-                        </div>
+                      <div>
+                        <CustomFormInput items={items}></CustomFormInput>
                       </div>
                     </div>
                   </div>
                 </div>
-              </Col>
-            ))}
+              </div>
+            </div>
+          </Col>
+          <DynamicButtonGroup buttons={buttons} />
         </Row>
       </div>
     </section>

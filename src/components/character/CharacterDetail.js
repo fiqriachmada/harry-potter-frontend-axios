@@ -23,7 +23,7 @@ const CharacterDetail = ({ match, history }) => {
 
   return (
     <Row>
-      {character.map(character => (
+      {/* {character.map(character => ( */}
         <Col className='mb-3'>
           <h3 className='mb-3'>Character Detail </h3>
           <div className='card shadow-lg py-5 mb-5 '>
@@ -147,7 +147,7 @@ const CharacterDetail = ({ match, history }) => {
             </button>
           </div>
         </Col>
-      ))}
+      {/* ))} */}
     </Row>
   )
 }
