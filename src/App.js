@@ -1,10 +1,17 @@
-import Routing from "./pages/Routing";
+import React, { useState } from 'react'
+import Routing from './pages/Routing'
 
+function App () {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
-const App = () => {
   return (
-    <Routing/>
-  );
-};
+    <div>
+      <Routing
+        isAuthenticated={isAuthenticated}
+        setIsAuthenticated={setIsAuthenticated}
+      />
+    </div>
+  )
+}
 
-export default App;
+export default App

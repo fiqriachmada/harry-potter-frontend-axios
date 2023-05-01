@@ -1,9 +1,10 @@
 import React from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import { LogoutButton } from '../../components/login'
 // import Members from "../../components/member/Members";
 
-const Navigation = () => {
+const Navigation = ({ isAuthenticated, setIsAuthenticated }) => {
   const navStyle = {
     color: 'white',
     textDecoration: 'none'
@@ -22,13 +23,20 @@ const Navigation = () => {
           Harry Potter App
         </Link>
         <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-        <Navbar.Collapse id='responsive-navbar-nav text-right'>
+        <Navbar.Collapse id='responsive-navbar-nav text-left'>
           <Nav className='text-center'>
             <Nav.Link>
               <Link to='/characters' style={navStyle}>
                 Character
               </Link>
             </Nav.Link>
+            {/* {isAuthenticated && (
+              <Nav.Link>
+                <LogoutButton
+                  setIsAuthenticated={setIsAuthenticated}
+                ></LogoutButton>
+              </Nav.Link>
+            )} */}
           </Nav>
         </Navbar.Collapse>
       </Container>
