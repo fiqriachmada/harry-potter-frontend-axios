@@ -24,7 +24,7 @@ function LoginPage({ setIsAuthenticated }) {
       })
       .catch((error) => {
         Swal.fire(error.message.toString(), "Gagal", "error");
-        setError(error.response.data.toString());
+        setError(error.response.data);
       });
   };
 
