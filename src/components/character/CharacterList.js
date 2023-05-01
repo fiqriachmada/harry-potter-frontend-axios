@@ -31,7 +31,22 @@ const CharacterList = ({ match, history }) => {
     getCharacterList(currentPage)
       .then(response => {
         const data = response.data
-        setCharacters(prevCharacters => [...prevCharacters, ...data.data])
+        // setCharacters(prevCharacters => {
+        //   [...prevCharacters, ...data.data]
+        //   if (prevCharacters.length === data.total) {
+        //     // hapus event listener ketika jumlah karakter mencapai jumlah maksimum
+        //     window.removeEventListener('scroll', handleScroll)
+        //   }
+        // })
+        setCharacters(prevCharacters => {
+          const updatedCharacters = [...prevCharacters, ...data.data]
+          if (updatedCharacters.length === data.total) {
+            // hapus event listener ketika jumlah karakter mencapai jumlah maksimum
+            window.removeEventListener('scroll', handleScroll)
+          }
+          return updatedCharacters
+        })
+
         setIsLoading(false)
       })
       .catch(error => {
@@ -80,11 +95,19 @@ const CharacterList = ({ match, history }) => {
             image={character.image}
             handleDelete={handleDelete}
             renderTooltip={renderTooltip(character)}
+            onClick={() => {
+              history.push('/characters/' + character.id)
+            }}
           />
         ))}
         {isLoading === true && (
           <div className='d-flex justify-content-center mt-5 mb-5'>
             Please Wait...
+          </div>
+        )}
+        {isLoading === false && characters.length === characters.total && (
+          <div className='d-flex justify-content-center mt-5 mb-5'>
+            End of List
           </div>
         )}
       </Row>

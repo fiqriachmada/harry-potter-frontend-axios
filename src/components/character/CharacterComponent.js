@@ -12,10 +12,11 @@ const CharacterComponent = ({
   handleDelete,
   renderTooltip,
   onClick,
+  history
 }) => {
   return (
     <Col lg={3} md={6}>
-      <Card className="book-card mb-3" onClick={onClick}>
+      <Card className="book-card mb-3" >
         <OverlayTrigger
           placement="top"
           delay={{ show: 250, hide: 400 }}
@@ -25,6 +26,7 @@ const CharacterComponent = ({
             className="text-center"
             alt={image}
             src={image}
+            onClick={onClick}
             style={{
               height: 300,
               background: `lightgrey`,
