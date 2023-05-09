@@ -1,35 +1,50 @@
-import React, { useState, useEffect } from "react";
-import { Button, Col, Form, Image, Row } from "react-bootstrap";
-import Swal from "sweetalert2";
+import React, { useState, useEffect } from 'react';
+import { Button, Col, Form, Image, Row } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 import {
   createCharacter,
   getCharacterHouses,
   getCharacterSpecies,
-} from "../../apis/characterService";
+} from '../../apis/characterService';
+import { FilePond, registerPlugin } from 'react-filepond';
+import 'filepond/dist/filepond.min.css';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
+
+registerPlugin(FilePondPluginImagePreview);
 
 function CharacterAdd({ history, match }) {
   const id = match.params.id;
   const [character, setCharacter] = useState({
-    full_name: "",
-    gender: "male",
-    species: "human",
-    house: "Gryffindor",
-    date_of_birth: "",
-    year_of_birth: "",
+    full_name: '',
+    gender: 'male',
+    species: 'human',
+    house: 'Gryffindor',
+    date_of_birth: '',
+    year_of_birth: '',
+    image_url: '',
   });
   const [species, setSpecies] = useState([]);
   const [house, setHouse] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    return createCharacter({ ...character })
+    const formData = new FormData();
+    formData.append('full_name', character.full_name);
+    formData.append('gender', character.gender);
+    formData.append('species', character.species);
+    formData.append('house', character.house);
+    formData.append('date_of_birth', character.date_of_birth);
+    formData.append('year_of_birth', character.year_of_birth);
+    formData.append('image_url', character.image_url);
+    return createCharacter(formData)
       .then((response) => {
-        Swal.fire("Berhasil Menambah " + character.full_name, "", "success");
-        history.push("/characters/");
+        Swal.fire('Berhasil Menambah ' + character.full_name, '', 'success');
+        history.push('/characters/');
       })
       .catch((error) => {
-        Swal.fire(error, "Gagal", "error");
-        history.push("/characters/");
+        Swal.fire(error, 'Gagal', 'error');
+        history.push('/characters/');
       });
   };
 
@@ -81,6 +96,41 @@ function CharacterAdd({ history, match }) {
                       <div>
                         <Form className="mb-5 my-2">
                           <Form.Group className="mb-3">
+                            <Form.Label>Upload Image</Form.Label>
+                            <FilePond
+                              credits={false}
+                              allowImagePreview={true}
+                              allowMultiple={false}
+                              server={{
+                                process: {
+                                  url: 'https://api-harry-potter-app.cyclic.app/upload',
+                                  method: 'POST',
+                                  withCredentials: false,
+                                  headers: {},
+                                  timeout: 7000,
+                                  onload: null,
+                                  onerror: null,
+                                  ondata: null,
+                                  ontimeout: null,
+                                  onprogress: null,
+                                  onpreparefile: null,
+                                },
+                              }}
+                              onupdatefiles={(fileItems) => {
+                                if (fileItems.length > 0) {
+                                  setCharacter({
+                                    ...character,
+                                    image_url: fileItems[0].file,
+                                  });
+                                } else {
+                                  // Handle the case when the user cancelled the upload
+                                  console.log('Upload cancelled');
+                                }
+                              }}
+                            />
+                          </Form.Group>
+
+                          <Form.Group className="mb-3">
                             <Form.Label>Name</Form.Label>
                             <Form.Control
                               type="text"
@@ -106,8 +156,7 @@ function CharacterAdd({ history, match }) {
                                   ...character,
                                   gender: e.target.value,
                                 })
-                              }
-                            >
+                              }>
                               <option value="male">Male</option>
                               <option value="female">Female</option>
                             </Form.Select>
@@ -124,13 +173,11 @@ function CharacterAdd({ history, match }) {
                                   species: e.target.value,
                                 })
                               }
-                              className="text-capitalize"
-                            >
+                              className="text-capitalize">
                               {species.map((species) => (
                                 <option
                                   value={species.species}
-                                  className="text-capitalize"
-                                >
+                                  className="text-capitalize">
                                   {species.species}
                                 </option>
                               ))}
@@ -148,13 +195,11 @@ function CharacterAdd({ history, match }) {
                                   house: e.target.value,
                                 })
                               }
-                              className="text-capitalize"
-                            >
+                              className="text-capitalize">
                               {house.map((house) => (
                                 <option
                                   value={house.house}
-                                  className="text-capitalize"
-                                >
+                                  className="text-capitalize">
                                   {house.house}
                                 </option>
                               ))}
@@ -183,8 +228,7 @@ function CharacterAdd({ history, match }) {
 
                           <button
                             className="btn btn-primary"
-                            onClick={handleSubmit}
-                          >
+                            onClick={handleSubmit}>
                             Submit
                           </button>
                         </Form>
