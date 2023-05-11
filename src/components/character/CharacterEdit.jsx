@@ -156,13 +156,6 @@ function CharacterEdit({ history, match }) {
             <div className="card shadow-lg h-100 py- mb-1 ">
               <div className="card-body">
                 <div className="row">
-                  {/* <div className="col-lg-3 mb-3">
-                    <div className="d-flex justify-content-center">
-                      <CustomImage
-                        src={character.image || urlImage + character.image_url}
-                      />
-                    </div>
-                  </div> */}
                   <div className="col">
                     <div className="row no-gutters align-items-center">
                       <div className="col mr-2"></div>

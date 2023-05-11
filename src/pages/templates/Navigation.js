@@ -1,8 +1,6 @@
 import React from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { LogoutButton } from '../../components/login'
-// import Members from "../../components/member/Members";
 
 const Navigation = ({ isAuthenticated, setIsAuthenticated }) => {
   const navStyle = {

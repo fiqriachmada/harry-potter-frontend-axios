@@ -1,12 +1,12 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { loginUser } from '../../apis/userServices';
 import Swal from 'sweetalert2';
 import { Tabs, Tab, Alert } from 'react-bootstrap';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-function LoginPage({ setIsAuthenticated }) {
+function LoginUser({ setIsAuthenticated }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -143,6 +143,7 @@ function LoginPage({ setIsAuthenticated }) {
                   </div>
                 </div>
               </div>
+
               <div className="row mt-5 mb-5 mx-3">
                 <button className="btn btn-outline-primary" type="submit">
                   Log In
@@ -152,8 +153,12 @@ function LoginPage({ setIsAuthenticated }) {
           </div>
         </Tab>
       </Tabs>
+
+      <div className="d-flex justify-content-center mb-3">
+        <Link to={'/register'}>Have no account? Register Here</Link>
+      </div>
     </div>
   );
 }
 
-export default LoginPage;
+export default LoginUser;
