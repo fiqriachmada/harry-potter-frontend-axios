@@ -1,31 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { Button, Col, Form, Image, Row } from "react-bootstrap";
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Form, Image, Row } from 'react-bootstrap';
 import {
   getCharacterById,
   updateCharacter,
   getCharacterSpecies,
   getCharacterHouses,
-} from "../../apis/characterService";
-import Swal from "sweetalert2";
-import { CustomFormInput, CustomImage, DynamicButtonGroup } from ".";
+} from '../../apis/characterService';
+import Swal from 'sweetalert2';
+import { CustomFormInput, CustomImage, DynamicButtonGroup } from '.';
 
 function CharacterEdit({ history, match }) {
   const id = match.params.id;
-  const [character, setCharacter] = useState("");
+  const [character, setCharacter] = useState('');
   const [species, setSpecies] = useState([]);
   const [house, setHouse] = useState([]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!character) return;
-    return updateCharacter({ ...character }, id)
+
+    const formData = new FormData();
+    formData.append('full_name', character.full_name);
+    formData.append('gender', character.gender);
+    formData.append('species', character.species);
+    formData.append('house', character.house);
+    formData.append('date_of_birth', character.date_of_birth);
+    formData.append('year_of_birth', character.year_of_birth);
+    character.image_url != null &&
+      formData.append('image_url', character.image_url);
+    return updateCharacter(formData, id)
       .then((response) => {
-        Swal.fire("Berhasil Mengubah " + character.full_name, "", "success");
-        history.push("/characters/" + id);
+        Swal.fire('Berhasil Mengubah ' + character.full_name, '', 'success');
+        history.push('/characters/' + id);
       })
       .catch((error) => {
-        Swal.fire(error, "Gagal", "error");
-        history.push("/characters/" + id);
+        Swal.fire(error, 'Gagal', 'error');
+        history.push('/characters/' + id);
       });
   };
 
@@ -55,8 +65,8 @@ function CharacterEdit({ history, match }) {
 
   const items = [
     {
-      label: "Full Name",
-      placeholder: "Enter Name of the Character",
+      label: 'Full Name',
+      placeholder: 'Enter Name of the Character',
       onChange: (e) =>
         setCharacter({
           ...character,
@@ -65,10 +75,10 @@ function CharacterEdit({ history, match }) {
       value: character.full_name,
     },
     {
-      label: "Gender",
+      label: 'Gender',
       options: [
-        { label: "Male", value: "male" },
-        { label: "Female", value: "female" },
+        { label: 'Male', value: 'male' },
+        { label: 'Female', value: 'female' },
       ],
       onChange: (e) =>
         setCharacter({
@@ -78,7 +88,7 @@ function CharacterEdit({ history, match }) {
       value: character.gender,
     },
     {
-      label: "Species",
+      label: 'Species',
       options: species.map((species) => ({
         label: species.species,
         value: species.species,
@@ -91,7 +101,7 @@ function CharacterEdit({ history, match }) {
       value: character.species,
     },
     {
-      label: "House",
+      label: 'House',
       options: house.map((house) => ({
         label: house.house,
         value: house.house,
@@ -104,8 +114,8 @@ function CharacterEdit({ history, match }) {
       value: character.house,
     },
     {
-      label: "Date of Birth",
-      type: "date",
+      label: 'Date of Birth',
+      type: 'date',
       onChange: (e) =>
         setCharacter({
           ...character,
@@ -124,9 +134,18 @@ function CharacterEdit({ history, match }) {
   };
 
   const buttons = [
-    { text: "Back", onClick: onHandleBack, variant: "secondary" },
-    { text: "Submit", onClick: onHandleSubmit },
+    { text: 'Back', onClick: onHandleBack, variant: 'secondary' },
+    { text: 'Submit', onClick: onHandleSubmit },
   ];
+
+  const urlImage = process.env.REACT_APP_URL_IMAGE;
+
+  const handleImageChange = (event) => {
+    setCharacter({
+      ...character,
+      image_url: event.target.files[0],
+    });
+  };
 
   return (
     <section>
@@ -137,16 +156,34 @@ function CharacterEdit({ history, match }) {
             <div className="card shadow-lg h-100 py- mb-1 ">
               <div className="card-body">
                 <div className="row">
-                  <div className="col-lg-3 mb-3">
+                  {/* <div className="col-lg-3 mb-3">
                     <div className="d-flex justify-content-center">
-                      <CustomImage src={character.image || ""} />
+                      <CustomImage
+                        src={character.image || urlImage + character.image_url}
+                      />
                     </div>
-                  </div>
-                  <div className="col-lg-9">
+                  </div> */}
+                  <div className="col">
                     <div className="row no-gutters align-items-center">
                       <div className="col mr-2"></div>
                     </div>
                     <hr />
+                    <div class="mb-1">
+                      <label class="form-label">
+                        Default file input example
+                      </label>
+                      <input
+                        class="form-control"
+                        type="file"
+                        onChange={handleImageChange}
+                      />
+                      <input
+                        disabled
+                        class="form-control"
+                        value={character.image_url}
+                      />
+                    </div>
+
                     <div className="row">
                       <div>
                         <CustomFormInput items={items}></CustomFormInput>
