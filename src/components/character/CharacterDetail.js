@@ -16,22 +16,27 @@ const CharacterDetail = ({ match, history }) => {
   };
   const handleNextClick = async () => {};
 
-  const urlImage = process.env.IMAGE_URL;
-
-  console.log(`process.env.URL_IMAGE`, `${process.env.URL_IMAGE}`);
-
-  console.log('urlImage', urlImage);
-
-  console.log(
-    'urlImage + / + character.image',
-    'https://ik.imagekit.io/fiqriachmada' + '/' + character.image
-  );
+  const urlImage = process.env.REACT_APP_URL_IMAGE;
 
   useEffect(() => {
     getCharacterById(id).then((response) => {
       setCharacter(response.data.data);
     });
   }, [id]);
+
+  const [hovered, setHovered] = useState(false);
+
+  useEffect(() => {
+    let timerId;
+    const imgEl = document.getElementById('my-image');
+    if (hovered) {
+      timerId = setTimeout(() => {
+        imgEl.classList.add('shadow-lg');
+      }, 500);
+    } else {
+      imgEl.classList.remove('shadow-lg');
+    }
+  }, [hovered]);
 
   return (
     <Row>
@@ -40,18 +45,10 @@ const CharacterDetail = ({ match, history }) => {
         <div className="card shadow-lg py-5 mb-5 ">
           <div className="d-flex justify-content-center mt-2 mb-2">
             <Image
-              src={character.image}
-              style={{
-                width: 250,
-                height: 250,
-                background: `lightgrey`,
-                borderRadius: 5,
-              }}
-            />
-            <Image
-              src={
-                'https://ik.imagekit.io/fiqriachmada' + '/' + character.image
-              }
+              id="my-image"
+              onMouseOver={() => setHovered(true)}
+              onMouseOut={() => setHovered(false)}
+              src={character.image || urlImage + '/' + character.image_url}
               style={{
                 width: 250,
                 height: 250,
@@ -60,6 +57,7 @@ const CharacterDetail = ({ match, history }) => {
               }}
             />
           </div>
+
           <div className="card-body">
             <div className="col">
               <div className="col-md-12">

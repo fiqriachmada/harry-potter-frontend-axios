@@ -111,9 +111,6 @@ function CharacterAdd({ history, match }) {
                                   onload: null,
                                   onerror: null,
                                   ondata: null,
-                                  ontimeout: null,
-                                  onprogress: null,
-                                  onpreparefile: null,
                                 },
                               }}
                               onupdatefiles={(fileItems) => {

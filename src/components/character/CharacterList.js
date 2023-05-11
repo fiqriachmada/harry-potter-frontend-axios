@@ -60,12 +60,12 @@ const CharacterList = ({ match, history }) => {
 
   const handleDelete = async (id) => {
     await deleteCharacter(id)
-      .then(() => {
+      .then((response) => {
         history.push('/');
-        Swal.fire('', '', 'success');
+        Swal.fire('Deleted ' + response.data.data.full_name, '', 'success');
       })
       .catch((error) => {
-        setValidation(error.response.data);
+        Swal.fire('' + error, error, 'error');
       });
   };
 
