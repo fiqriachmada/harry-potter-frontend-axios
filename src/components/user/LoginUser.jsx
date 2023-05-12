@@ -3,7 +3,11 @@ import { Link, useHistory } from 'react-router-dom';
 import { loginUser } from '../../apis/userServices';
 import Swal from 'sweetalert2';
 import { Tabs, Tab, Alert } from 'react-bootstrap';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEye,
+  faEyeSlash,
+  faSpinner,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function LoginUser({ setIsAuthenticated }) {
@@ -11,6 +15,7 @@ function LoginUser({ setIsAuthenticated }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -21,6 +26,7 @@ function LoginUser({ setIsAuthenticated }) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     return loginUser({ username, email, password })
       .then((response) => {
         Swal.fire(
@@ -29,11 +35,13 @@ function LoginUser({ setIsAuthenticated }) {
           'success'
         );
         setIsAuthenticated(true);
+        setLoading(false);
         history.push('/characters/');
       })
       .catch((error) => {
         Swal.fire(error.response.data.message, 'Failed', 'error');
         setError(error.response.data.message);
+        setLoading(false);
       });
   };
 
@@ -88,8 +96,14 @@ function LoginUser({ setIsAuthenticated }) {
                 </div>
               </div>
               <div className="row mt-5 mb-5 mx-3">
-                <button className="btn btn-outline-primary" type="submit">
+                <button
+                  className="btn btn-outline-primary"
+                  type="submit"
+                  disabled={loading}>
                   Log In
+                  {loading && (
+                    <FontAwesomeIcon icon={faSpinner} spin className="mx-3" />
+                  )}
                 </button>
               </div>
             </form>
@@ -145,8 +159,14 @@ function LoginUser({ setIsAuthenticated }) {
               </div>
 
               <div className="row mt-5 mb-5 mx-3">
-                <button className="btn btn-outline-primary" type="submit">
+                <button
+                  className="btn btn-outline-primary"
+                  type="submit"
+                  disabled={loading}>
                   Log In
+                  {loading && (
+                    <FontAwesomeIcon icon={faSpinner} spin className="mx-3" />
+                  )}
                 </button>
               </div>
             </form>
