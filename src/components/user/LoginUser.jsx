@@ -115,7 +115,7 @@ function LoginUser({ setIsAuthenticated }) {
           onClick={(e) => {
             setUsername('');
           }}>
-          <div>
+          <div className='container'>
             <form onSubmit={handleSubmit}>
               {error && (
                 <Alert variant={'danger'} className="mt-3 mx-3">
