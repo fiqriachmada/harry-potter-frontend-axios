@@ -15,7 +15,7 @@ const CharacterComponent = ({
   history
 }) => {
   return (
-    <Col lg={3} md={6}>
+    <Col xl={3} lg={4} md={6}>
       <Card className="book-card mb-3" >
         <OverlayTrigger
           placement="top"

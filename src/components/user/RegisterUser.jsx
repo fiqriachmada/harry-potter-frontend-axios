@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { loginUser, registerUser } from '../../apis/userServices';
+import { registerUser } from '../../apis/userServices';
 import Swal from 'sweetalert2';
-import { Tabs, Tab, Alert } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

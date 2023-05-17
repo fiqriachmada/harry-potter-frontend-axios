@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react';
-import { Row, Tooltip } from 'react-bootstrap';
+import { Alert, Row, Tooltip } from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 import { deleteCharacter, getCharacterList } from '../../apis/characterService';
 import CharacterComponent from './CharacterComponent';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const CharacterList = ({ match, history }) => {
   const { path } = match;
 
   const [characters, setCharacters] = useState([]);
-  const [validation, setValidation] = useState({});
+  const [meta, setMeta] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -31,10 +33,12 @@ const CharacterList = ({ match, history }) => {
     getCharacterList(currentPage)
       .then((response) => {
         const data = response.data;
+        const meta = response.data.meta.pagination;
 
+        setMeta(meta);
         setCharacters((prevCharacters) => {
           const updatedCharacters = [...prevCharacters, ...data.data];
-          if (updatedCharacters.length === data.total) {
+          if (updatedCharacters.length === meta.totalCount) {
             // hapus event listener ketika jumlah karakter mencapai jumlah maksimum
             window.removeEventListener('scroll', handleScroll);
           }
@@ -44,7 +48,7 @@ const CharacterList = ({ match, history }) => {
         setIsLoading(false);
       })
       .catch((error) => {
-        setValidation({ error: error.message });
+        // setValidation({ error: error.message });
         setIsLoading(false);
       });
   };
@@ -72,7 +76,7 @@ const CharacterList = ({ match, history }) => {
   const renderTooltip = (character) => <Tooltip>{character.full_name}</Tooltip>;
 
   return (
-    <section className="py-5 container mt-1">
+    <section className="container mt-1">
       <h3>Character Page</h3>
       <Link to="/characters/add" className="btn btn-sm btn-primary mb-3">
         Add Character
@@ -97,17 +101,20 @@ const CharacterList = ({ match, history }) => {
             }}
           />
         ))}
-        {isLoading === true && (
-          <div className="d-flex justify-content-center mt-5 mb-5">
-            Please Wait...
-          </div>
-        )}
-        {isLoading === false && characters.length === characters.total && (
-          <div className="d-flex justify-content-center mt-5 mb-5">
-            End of List
-          </div>
-        )}
       </Row>
+      {isLoading === false && characters.length === meta.totalCount && (
+        <Alert className="col mt-5 mb-5">
+          <div className="d-flex justify-content-center ">End of List</div>
+        </Alert>
+      )}
+      {isLoading === true && (
+        <Alert className="col mt-5 mb-5">
+          <div className="d-flex justify-content-center">
+            Please Wait...
+            <FontAwesomeIcon icon={faSpinner} spin className="mx-3" />
+          </div>
+        </Alert>
+      )}
     </section>
   );
 };

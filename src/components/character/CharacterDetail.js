@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { getCharacterById } from '../../apis/characterService';
 import dotenv from 'dotenv';
 import './CharacterDetail.css';
+import { DynamicButtonGroup } from '.';
 
 dotenv.config();
 
@@ -38,11 +39,27 @@ const CharacterDetail = ({ match, history }) => {
     }
   }, [hovered]);
 
+  const buttons = [
+    {
+      text: 'Back',
+      variant: 'secondary',
+      onClick: () => {
+        history.push('/characters');
+      },
+    },
+    {
+      text: 'Edit',
+      onClick: () => {
+        history.push('/characters/edit/' + id);
+      },
+    },
+  ];
+
   return (
     <Row>
       <h3 className="mb-3">Character Detail </h3>
       <Col className="mt-3 mb-3">
-        <div className="card shadow-lg py-5 mb-5 ">
+        <div className="card shadow-lg py-5 mb-3">
           <div className="d-flex justify-content-center mt-2 mb-2">
             <Image
               id="my-image"
@@ -62,17 +79,8 @@ const CharacterDetail = ({ match, history }) => {
             <div className="col">
               <div className="col-md-12">
                 <div className="row no-gutters align-items-center">
-                  <div className="col mr-2">
+                  <div className="col">
                     <h1>{character.full_name}</h1>
-                  </div>
-                  <div className="col-auto">
-                    <div className="btn-group float-right">
-                      <Link
-                        to={`/characters/edit/${character.id}`}
-                        className="btn btn-sm btn-primary mb-3">
-                        Edit
-                      </Link>
-                    </div>
                   </div>
                 </div>
                 <hr />
@@ -140,24 +148,8 @@ const CharacterDetail = ({ match, history }) => {
             </div>
           </div>
         </div>
-        <div
-          className={
-            id > 1
-              ? 'd-flex justify-content-between mt-2'
-              : 'd-flex justify-content-end mt-2'
-          }>
-          {id > 1 && (
-            <button
-              disabled={id <= 1}
-              type="button"
-              class="btn btn-dark"
-              onClick={handlePreviousClick}>
-              &larr; Previous
-            </button>
-          )}
-          <button type="button" class="btn btn-dark" onClick={handleNextClick}>
-            Next &rarr;
-          </button>
+        <div className="d-flex justify-content-between">
+          <DynamicButtonGroup buttons={buttons} />
         </div>
       </Col>
     </Row>

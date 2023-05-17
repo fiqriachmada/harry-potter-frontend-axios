@@ -187,7 +187,9 @@ function CharacterEdit({ history, match }) {
               </div>
             </div>
           </Col>
-          <DynamicButtonGroup buttons={buttons} />
+          <div className="d-flex justify-content-between">
+            <DynamicButtonGroup buttons={buttons} />
+          </div>
         </Row>
       </div>
     </section>
