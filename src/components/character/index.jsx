@@ -1,4 +1,5 @@
 import React from 'react';
+import { Children } from 'react';
 import { Button, Form } from 'react-bootstrap';
 
 export const CustomImage = ({ src, width, height, style }) => {
@@ -58,16 +59,19 @@ export const DynamicButtonGroup = ({ buttons }) => {
   return (
     // <div className="d-flex justify-content-between mt-4">
     buttons != null &&
-    buttons.map(({ text, variant, color, onClick, className }) => (
-      <Button
-        key={text}
-        variant={variant}
-        color={color}
-        className={className}
-        onClick={onClick}>
-        {text}
-      </Button>
-    ))
+    buttons.map(
+      ({ text, variant, color, onClick, className, disabled, children }) => (
+        <Button
+          key={text}
+          variant={variant}
+          color={color}
+          className={className}
+          disabled={disabled}
+          onClick={onClick}>
+          {text} {children}
+        </Button>
+      )
+    )
     // </div>
   );
 };

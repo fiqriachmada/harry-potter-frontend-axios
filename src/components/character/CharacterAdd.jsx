@@ -10,11 +10,13 @@ import { FilePond, registerPlugin } from 'react-filepond';
 import 'filepond/dist/filepond.min.css';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
+import { DynamicButtonGroup } from '.';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 registerPlugin(FilePondPluginImagePreview);
 
 function CharacterAdd({ history, match }) {
-  const id = match.params.id;
   const [character, setCharacter] = useState({
     full_name: '',
     gender: 'male',
@@ -26,9 +28,12 @@ function CharacterAdd({ history, match }) {
   });
   const [species, setSpecies] = useState([]);
   const [house, setHouse] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setLoading(true);
+
     const formData = new FormData();
     formData.append('full_name', character.full_name);
     formData.append('gender', character.gender);
@@ -37,15 +42,23 @@ function CharacterAdd({ history, match }) {
     formData.append('date_of_birth', character.date_of_birth);
     formData.append('year_of_birth', character.year_of_birth);
     formData.append('image_url', character.image_url);
-    return createCharacter(formData)
-      .then((response) => {
-        Swal.fire('Berhasil Menambah ' + character.full_name, '', 'success');
-        history.push('/characters/');
-      })
-      .catch((error) => {
-        Swal.fire(error, 'Gagal', 'error');
-        history.push('/characters/');
-      });
+
+    setTimeout(() => {
+      return createCharacter(formData)
+        .then((response) => {
+          Swal.fire('Berhasil Menambah ' + character.full_name, '', 'success');
+          setLoading(false);
+          history.push('/characters/');
+        })
+        .catch((error) => {
+          Swal.fire(
+            error.response.data.message,
+            'Status: ' + error.response.data.status,
+            'error'
+          );
+          setLoading(false);
+        });
+    }, 5000);
   };
 
   const getDataSpecies = () => {
@@ -65,13 +78,30 @@ function CharacterAdd({ history, match }) {
     getDataHouses();
   }, []);
 
+  const buttons = [
+    {
+      text: 'Back',
+      variant: 'secondary',
+      //
+    },
+    {
+      text: 'Submit',
+      // variant: 'secondary',
+      onClick: handleSubmit,
+      disabled: loading,
+      children: loading && (
+        <FontAwesomeIcon icon={faSpinner} spin className="mx-1" />
+      ),
+    },
+  ];
+
   return (
     <section>
       <div>
         <Row>
           <Col className="mb-5">
             <h3>Character Form </h3>
-            <div className="card shadow-lg h-100 py-5 mb-5 ">
+            <div className="card shadow-lg h-100 mb-2">
               <div className="card-body">
                 <div className="row">
                   <div className="col">
@@ -81,8 +111,8 @@ function CharacterAdd({ history, match }) {
                     <hr />
                     <div className="row">
                       <div>
-                        <Form className="mb-5 my-2">
-                          <Form.Group className="mb-3">
+                        <Form className="">
+                          <Form.Group className="">
                             <Form.Label>Upload Image</Form.Label>
                             <FilePond
                               credits={false}
@@ -190,7 +220,7 @@ function CharacterAdd({ history, match }) {
                             </Form.Select>
                           </Form.Group>
 
-                          <Form.Group className="mb-3">
+                          <Form.Group className="">
                             <Form.Label className="text-capitalize">
                               date of birth
                             </Form.Label>
@@ -209,18 +239,15 @@ function CharacterAdd({ history, match }) {
                               }}
                             />
                           </Form.Group>
-
-                          <button
-                            className="btn btn-primary"
-                            onClick={handleSubmit}>
-                            Submit
-                          </button>
                         </Form>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="d-flex justify-content-between">
+              <DynamicButtonGroup buttons={buttons} />
             </div>
           </Col>
         </Row>
