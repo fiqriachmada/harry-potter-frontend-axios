@@ -6,7 +6,7 @@ import { Alert } from "react-bootstrap";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function RegisterUser({ setIsAuthenticated }) {
+function UserRegister({ setIsAuthenticated }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -111,4 +111,4 @@ function RegisterUser({ setIsAuthenticated }) {
   );
 }
 
-export default RegisterUser;
+export default UserRegister;

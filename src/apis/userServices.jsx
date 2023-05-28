@@ -1,11 +1,14 @@
-import http from './httpCommon';
+import http from "./httpCommon";
 
-const baseURL = '/users';
+const baseURL = "/users";
 
 const registerUser = (data) => http.post(`${baseURL}/`, data);
 
 const loginUser = (data) => http.post(`${baseURL}/login`, data);
 
+const updateUser = (data, id) => http.put(`${baseURL}/${id}`, data);
+
+const getUserById = (id) => http.get(`${baseURL}/${id}`);
 
 // const getCharacterList = (page) => http.get(`${baseURL}?page=${page}`);
 
@@ -19,4 +22,4 @@ const loginUser = (data) => http.post(`${baseURL}/login`, data);
 
 // const deleteCharacter = (id) => http.delete(`${baseURL}/${id}`);
 
-export { loginUser, registerUser };
+export { loginUser, registerUser, updateUser, getUserById };

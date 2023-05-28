@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function LoginUser({ setIsAuthenticated }) {
+function UserLogin({ setIsAuthenticated, setUserProfile }) {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,6 +29,13 @@ function LoginUser({ setIsAuthenticated }) {
     setLoading(true);
     return loginUser({ username, email, password })
       .then((response) => {
+        const data = response.data.data;
+        setUserProfile(data);
+
+        localStorage.setItem("token", data.token);
+
+        localStorage.setItem("userProfile", JSON.stringify(data));
+
         Swal.fire(
           "Successfully Login with " + (email || username),
           "",
@@ -190,4 +197,4 @@ function LoginUser({ setIsAuthenticated }) {
   );
 }
 
-export default LoginUser;
+export default UserLogin;
