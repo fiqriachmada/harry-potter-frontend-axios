@@ -1,28 +1,26 @@
-import React from "react";
-import { Button, Container, Dropdown, Nav, Navbar } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Button, Container, Dropdown, Nav, Navbar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import {
   faCircleUser,
   faArrowRightFromBracket,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useHistory } from "react-router-dom";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useHistory } from 'react-router-dom';
 
 const Navigation = ({ isAuthenticated, setIsAuthenticated, userProfile }) => {
   const navStyle = {
-    color: "white",
-    textDecoration: "none",
+    color: 'white',
+    textDecoration: 'none',
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userProfile");
+    localStorage.removeItem('token');
+    localStorage.removeItem('userProfile');
     setIsAuthenticated(false);
   };
 
   const history = useHistory();
-
-  console.log("userProfileNavigation", userProfile);
 
   return (
     <Navbar
@@ -30,8 +28,7 @@ const Navigation = ({ isAuthenticated, setIsAuthenticated, userProfile }) => {
       expand="lg"
       bg="dark"
       variant="dark"
-      className="navbar fixed-top"
-    >
+      className="navbar fixed-top">
       <Container>
         <Link to="/" style={navStyle}>
           Harry Potter App
@@ -51,13 +48,16 @@ const Navigation = ({ isAuthenticated, setIsAuthenticated, userProfile }) => {
                 <Dropdown.Toggle
                   bsPrefix="x"
                   className="fa fa-user-circle-o text-white"
-                  variant="transparent"
-                >
+                  variant="transparent">
                   <FontAwesomeIcon icon={faCircleUser} />
                 </Dropdown.Toggle>
 
-                <Dropdown.Menu align={"end"} className="text-uppercase">
-                  <Dropdown.Item onClick={()=>{history.push('/profile')}} className="bg-transparent">
+                <Dropdown.Menu align={'end'} className="text-uppercase">
+                  <Dropdown.Item
+                    onClick={() => {
+                      history.push('/profile');
+                    }}
+                    className="bg-transparent">
                     {/* <Link to={`/`}> */}
                     <button className="col-12 btn btn-light text-start">
                       <FontAwesomeIcon icon={faCircleUser} />
@@ -68,8 +68,7 @@ const Navigation = ({ isAuthenticated, setIsAuthenticated, userProfile }) => {
                   </Dropdown.Item>
                   <Dropdown.Item
                     className="bg-transparent"
-                    onClick={handleLogout}
-                  >
+                    onClick={handleLogout}>
                     <button className="col-12 btn btn-light text-start text-danger">
                       <FontAwesomeIcon icon={faArrowRightFromBracket} />
                       <strong className="mx-2">Logout</strong>
@@ -81,9 +80,8 @@ const Navigation = ({ isAuthenticated, setIsAuthenticated, userProfile }) => {
               <Button
                 variant="outline-primary"
                 onClick={() => {
-                  history.push("/login");
-                }}
-              >
+                  history.push('/login');
+                }}>
                 Login
               </Button>
             )}
