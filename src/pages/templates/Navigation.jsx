@@ -82,7 +82,7 @@ const Navigation = ({ isAuthenticated, setIsAuthenticated, userProfile }) => {
               </Dropdown>
             ) : (
               <Button
-                variant="outline-primary"
+                variant="outline-primary bg-white text-black"
                 onClick={() => {
                   history.push('/login');
                 }}>
