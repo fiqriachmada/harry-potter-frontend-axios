@@ -7,20 +7,24 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Navigation = ({ isAuthenticated, setIsAuthenticated, userProfile }) => {
   const navStyle = {
     color: 'white',
     textDecoration: 'none',
   };
+  const history = useHistory();
+
 
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userProfile');
     setIsAuthenticated(false);
+    history.push('/characters')
+    window.location.reload()
   };
 
-  const history = useHistory();
 
   return (
     <Navbar

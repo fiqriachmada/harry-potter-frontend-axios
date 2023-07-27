@@ -1,19 +1,19 @@
-import { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { loginUser } from "../../apis/userServices";
-import Swal from "sweetalert2";
-import { Tabs, Tab, Alert } from "react-bootstrap";
+import { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { loginUser } from '../../apis/userServices';
+import Swal from 'sweetalert2';
+import { Tabs, Tab, Alert } from 'react-bootstrap';
 import {
   faEye,
   faEyeSlash,
   faSpinner,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function UserLogin({ setIsAuthenticated, setUserProfile }) {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +21,7 @@ function UserLogin({ setIsAuthenticated, setUserProfile }) {
     setShowPassword(!showPassword);
   };
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const history = useHistory();
 
   const handleSubmit = async (event) => {
@@ -32,45 +32,42 @@ function UserLogin({ setIsAuthenticated, setUserProfile }) {
         const data = response.data.data;
         setUserProfile(data);
 
-        localStorage.setItem("token", data.token);
+        localStorage.setItem('token', data.token);
 
-        localStorage.setItem("userProfile", JSON.stringify(data));
+        localStorage.setItem('userProfile', JSON.stringify(data));
 
-        Swal.fire(
-          "Successfully Login with " + (email || username),
-          "",
-          "success"
-        );
         setIsAuthenticated(true);
+
+        history.push('/characters');
+        
         setLoading(false);
-        history.push("/characters/");
+
+        window.location.reload();
       })
       .catch((error) => {
-        Swal.fire(error.response.data.message, "Failed", "error");
-        setError(error.response.data.message);
         setLoading(false);
+        Swal.fire(error.response.data.message, 'Failed', 'error');
+        setError(error.response.data.message);
       });
   };
 
   return (
     <div style={{ paddingTop: 100, paddingBottom: 100 }}>
-      <div className="card" style={{ backgroundColor: "white" }}>
+      <div className="card" style={{ backgroundColor: 'white' }}>
         <Tabs
           defaultActiveKey="username"
           id="login-tabs"
-          className="justify-content-center"
-        >
+          className="justify-content-center">
           <Tab
             eventKey="username"
             title="Username"
             onClick={(e) => {
-              setEmail("");
-            }}
-          >
+              setEmail('');
+            }}>
             <div className="container">
               <form onSubmit={handleSubmit}>
                 {error && (
-                  <Alert variant={"danger"} className="mt-3 mx-3">
+                  <Alert variant={'danger'} className="mt-3 mx-3">
                     {error && <p>{error}</p>}
                   </Alert>
                 )}
@@ -90,7 +87,7 @@ function UserLogin({ setIsAuthenticated, setUserProfile }) {
                   <div className="input-group mb-3">
                     <input
                       value={password}
-                      type={showPassword ? "text" : "password"}
+                      type={showPassword ? 'text' : 'password'}
                       className="form-control"
                       onChange={(e) => setPassword(e.target.value)}
                     />
@@ -109,8 +106,7 @@ function UserLogin({ setIsAuthenticated, setUserProfile }) {
                   <button
                     className="btn btn-outline-primary"
                     type="submit"
-                    disabled={loading}
-                  >
+                    disabled={loading}>
                     Log In
                     {loading && (
                       <FontAwesomeIcon icon={faSpinner} spin className="mx-3" />
@@ -124,13 +120,12 @@ function UserLogin({ setIsAuthenticated, setUserProfile }) {
             eventKey="email"
             title="Email"
             onClick={(e) => {
-              setUsername("");
-            }}
-          >
+              setUsername('');
+            }}>
             <div className="container">
               <form onSubmit={handleSubmit}>
                 {error && (
-                  <Alert variant={"danger"} className="mt-3 mx-3">
+                  <Alert variant={'danger'} className="mt-3 mx-3">
                     {error && <p>{error}</p>}
                   </Alert>
                 )}
@@ -143,7 +138,7 @@ function UserLogin({ setIsAuthenticated, setUserProfile }) {
                       value={email}
                       onChange={(e) => {
                         setEmail(e.target.value);
-                        setUsername("");
+                        setUsername('');
                       }}
                     />
                   </label>
@@ -154,7 +149,7 @@ function UserLogin({ setIsAuthenticated, setUserProfile }) {
                   <div className="input-group mb-3">
                     <input
                       value={password}
-                      type={showPassword ? "text" : "password"}
+                      type={showPassword ? 'text' : 'password'}
                       className="form-control"
                       onChange={(e) => setPassword(e.target.value)}
                     />
@@ -174,8 +169,7 @@ function UserLogin({ setIsAuthenticated, setUserProfile }) {
                   <button
                     className="btn btn-outline-primary"
                     type="submit"
-                    disabled={loading}
-                  >
+                    disabled={loading}>
                     Log In
                     {loading && (
                       <FontAwesomeIcon icon={faSpinner} spin className="mx-3" />
@@ -189,7 +183,7 @@ function UserLogin({ setIsAuthenticated, setUserProfile }) {
 
         <div className="d-flex justify-content-center mb-3">
           <Alert>
-            <Link to={"/register"}>Have no account? Register Here</Link>
+            <Link to={'/register'}>Have no account? Register Here</Link>
           </Alert>
         </div>
       </div>
